@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width= , initial-scale=1.0" />
+    <title>HOME | Mama Recipes</title>
+
+    <!-- css bootstrap 5 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    />
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="./css/home.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item me-5">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link" href="#">Add Recipe</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link" href="#">Profile</a>
+            </li>
+          </ul>
+          <a href="#" class="nav-link">Login</a>
+        </div>
+      </div>
+    </nav>
+    <!-- end navbar -->
+
+    <!-- header -->
+    <section id="header">
+      <!-- overlay background -->
+      <div class="overlay-background"></div>
+
+      <div class="container">
+        <div class="row align-items-center">
+          <!-- left side -->
+          <div class="col-5">
+            <h1>
+              Discover Recipe <br />
+              & Delicious Food
+            </h1>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              placeholder="Search Recipe..."
+              id="search-recipe"
+            />
+          </div>
+
+          <!-- right side -->
+          <div class="col-6 offset-1 right-side">
+            <img
+              src="./images/home-recipe.png"
+              class="image-1"
+              alt=""
+              width="600px"
+            />
+            <img
+              src="./images/home-recipe-2.png"
+              class="image-2"
+              alt=""
+              width="500px"
+            />
+            <img
+              src="./images/home-recipe-3.png"
+              class="image-3"
+              width="500px"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end header -->
+
+    <!-- new recipe -->
+    <section id="new-recipe">
+      <!-- overlay background -->
+      <div class="overlay-background"></div>
+
+      <!-- title -->
+      <div class="container">
+        <h2 class="title">New Recipe</h2>
+      </div>
+
+      <!-- content -->
+      <div class="container">
+        <div class="row align-items-center">
+          <!-- left side -->
+          <div class="col-6">
+            <img
+              src="./images/new-recipe.jpg"
+              class="image-new-recipe"
+              width="500px"
+              alt=""
+            />
+          </div>
+
+          <div class="col-5 offset-1">
+            <h2 class="description">
+              Healthy Bone Broth <br />
+              Ramen (Quick & Easy)
+            </h2>
+            <p>
+              Quick + Easy Chicken Bone Broth Ramen- <br />
+              Healthy chicken ramen in a hurry? That’s right!
+            </p>
+            <a href="#" class="btn btn-lg btn-learn-more"> Learn More </a>
+          </div>
+        </div>
+      </div>
+      <!-- end title -->
+    </section>
+    <!-- end new recipe -->
+  </body>
+</html>
