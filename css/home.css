@@ -2,6 +2,12 @@ body {
   background-color: #fff5ec;
 }
 
+.navbar button {
+  background-color: #efc81a;
+  color: white;
+  border: 2px solid black;
+}
+
 /* style for header */
 #header {
   height: 100vh;
@@ -184,7 +190,7 @@ footer {
   text-align: center;
 }
 
-footer h2 {
+.footer h2 {
   font-style: normal;
   font-weight: 400;
   font-size: 52px;
@@ -194,7 +200,20 @@ footer h2 {
   color: #2e266f;
 }
 
-footer p {
+.footer p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 24px;
+  /* identical to box height, or 100% */
+
+  color: #707070;
+}
+
+footer .footer-link {
+  position: absolute;
+  margin-top: 380px;
+
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -203,4 +222,5 @@ footer p {
 
   color: #707070;
 }
+
 /* end style for footer */
