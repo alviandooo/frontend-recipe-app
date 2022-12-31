@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width= , initial-scale=1.0" />
+    <title>ADD RECIPE | Mama Recipes</title>
+
+    <!-- css bootstrap 5 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    />
+
+    <!-- footer css -->
+    <link rel="stylesheet" href="./css/footer.css" />
+
+    <!-- navbar css -->
+    <link rel="stylesheet" href="./css/navbar.css" />
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="./css/add-recipe.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item me-5">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link" href="#">Add Recipe</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link" href="#">Profile</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- end navbar -->
+
+    <!-- content -->
+    <section id="content">
+      <div
+        class="row content-item align-items-center"
+        style="display: flex; justify-content: center; align-items: center"
+      >
+        <div class="form-add-recipe col-lg-8 text-center">
+          <div class="text-center">
+            <input type="file" class="form-control" />
+            <input type="text" class="form-control" placeholder="Title" />
+            <textarea
+              class="form-control"
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              placeholder="Ingredients"
+            ></textarea>
+            <input type="text" class="form-control" placeholder="Video" />
+            <button class="btn btn-warning">Post</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end-content -->
+
+    <!-- footer -->
+    <footer>
+      <div class="footer">
+        <h2>Eat, Cook, Repeat</h2>
+        <p>Share your best recipe by uploading here !</p>
+      </div>
+      <div class="footer-link">
+        <p>&copy Copyright 2022 by M Restu Alviando. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- js bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
