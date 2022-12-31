@@ -1,5 +1,4 @@
 .left-side {
-  height: 100vh;
   background-image: url("../images/bg-login.png");
   background-size: cover;
 }
@@ -25,11 +24,11 @@
 }
 
 .section-form-register {
-  /* height: 100; */
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .section-form-register h1 {
@@ -73,14 +72,14 @@
   /* font-family: "Inter"; */
   font-style: normal;
   font-size: 14px;
-  line-height: 17px;
+  line-height: 15px;
   /* identical to box height */
 
   display: flex;
   align-items: center;
 
   color: #494949;
-  height: 50px;
+  height: 35px;
 }
 
 .section-form-register .form-group label {
@@ -119,7 +118,7 @@
   margin-bottom: 5px;
 }
 
-.sign-up {
+.login {
   /* font-family: "Airbnb Cereal App"; */
   font-style: normal;
   font-weight: 400;
@@ -131,7 +130,7 @@
   margin-top: 20px;
 }
 
-.sign-up a {
+.login a {
   color: #efc81a;
   text-decoration: none;
 }

@@ -1,0 +1,125 @@
+body {
+  background-color: #fff;
+}
+
+/* style for detail-recipe */
+#recipe {
+  margin-top: 150px;
+  margin-bottom: 200px;
+}
+
+#recipe .content {
+  justify-content: center;
+}
+
+#recipe .title h2 {
+  margin-bottom: 30px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 90px;
+
+  color: #2e266f;
+}
+
+.ingredients h3 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 62px;
+
+  color: #3f3a3a;
+}
+
+.ingredients li {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+
+  color: #000000;
+}
+
+.videos h3 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 62px;
+
+  color: #3f3a3a;
+}
+
+.videos button {
+  color: white;
+  width: 200px;
+  background-color: #efc81a;
+}
+
+.coment h3 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 62px;
+
+  color: #3f3a3a;
+}
+
+.comment button {
+  color: white;
+  background-color: #efc81a;
+  width: 200px;
+}
+
+.comment textarea {
+  background-color: #f6f5f4;
+}
+
+.comment .comment-user img {
+  border-radius: 30px;
+}
+
+/* end-style-for-detail-recipe */
+
+/* style for footer */
+footer {
+  height: 450px;
+  background-color: #efc81a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.footer h2 {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 52px;
+  line-height: 48px;
+  /* identical to box height, or 67% */
+
+  color: #2e266f;
+}
+
+.footer p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 24px;
+  /* identical to box height, or 100% */
+
+  color: #707070;
+}
+
+footer .footer-link {
+  position: absolute;
+  margin-top: 380px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  /* identical to box height, or 100% */
+
+  color: #707070;
+}
+
+/* end style for footer */
