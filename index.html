@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width= , initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>HOME | Mama Recipes</title>
 
     <!-- css bootstrap 5 -->
@@ -25,8 +25,19 @@
     <!-- navbar -->
     <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
       <div class="container">
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
             <li class="nav-item me-5">
               <a class="nav-link active" aria-current="page" href="index.html"
                 >Home</a
@@ -58,7 +69,7 @@
       <div class="container">
         <div class="row align-items-center">
           <!-- left side -->
-          <div class="col-5">
+          <div class="col-lg-5 order-1 order-lg-0">
             <h1>
               Discover Recipe <br />
               & Delicious Food
@@ -72,7 +83,7 @@
           </div>
 
           <!-- right side -->
-          <div class="col-6 offset-1 right-side">
+          <div class="col-lg-6 offset-1 right-side order-0 order-lg-1">
             <img
               src="./images/home-recipe.png"
               class="image-1"
@@ -111,7 +122,7 @@
       <div class="container">
         <div class="row align-items-center">
           <!-- left side -->
-          <div class="col-6">
+          <div class="col-lg-6">
             <img
               src="./images/new-recipe.jpg"
               class="image-new-recipe"
@@ -120,7 +131,7 @@
             />
           </div>
 
-          <div class="col-5 offset-1">
+          <div class="col-lg-5 offset-1 description-recipe">
             <h2 class="description">
               Healthy Bone Broth <br />
               Ramen (Quick & Easy)
@@ -150,7 +161,7 @@
 
         <!-- content -->
         <div class="row">
-          <div class="col-4">
+          <div class="col-lg-4 col-6 mb-md-4">
             <div class="clickable-image">
               <img
                 src="./images/popular-recipe-1.jpg"
@@ -161,7 +172,7 @@
             </div>
           </div>
 
-          <div class="col-4">
+          <div class="col-lg-4 col-6 mb-md-4">
             <div class="clickable-image">
               <img
                 src="./images/popular-recipe-2.jpg"
@@ -172,7 +183,7 @@
             </div>
           </div>
 
-          <div class="col-4">
+          <div class="col-lg-4 col-6 mb-md-4">
             <div class="clickable-image">
               <img
                 src="./images/popular-recipe-3.jpg"
@@ -182,10 +193,8 @@
               <h2 class="image-title">Banana Smothie Pop</h2>
             </div>
           </div>
-        </div>
 
-        <div class="row mt-4">
-          <div class="col-4">
+          <div class="col-lg-4 col-6 mb-md-4">
             <div class="clickable-image">
               <img
                 src="./images/popular-recipe-4.jpg"
@@ -196,7 +205,7 @@
             </div>
           </div>
 
-          <div class="col-4">
+          <div class="col-lg-4 col-6 mb-md-4">
             <div class="clickable-image">
               <img
                 src="./images/popular-recipe-5.jpg"
@@ -207,7 +216,7 @@
             </div>
           </div>
 
-          <div class="col-4">
+          <div class="col-lg-4 col-6 mb-md-4">
             <div class="clickable-image">
               <img
                 src="./images/popular-recipe-6.jpg"
@@ -228,9 +237,9 @@
       <div class="footer">
         <h2>Eat, Cook, Repeat</h2>
         <p>Share your best recipe by uploading here !</p>
-      </div>
-      <div class="footer-link">
-        <p>&copy Copyright 2022 by M Restu Alviando. All Rights Reserved.</p>
+        <div class="footer-link">
+          <p>&copy Copyright 2022 by M Restu Alviando. All Rights Reserved.</p>
+        </div>
       </div>
     </footer>
 

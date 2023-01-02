@@ -78,3 +78,31 @@ body {
 }
 
 /* end-style-for-detail-recipe */
+
+@media screen and (max-width: 576px) {
+  #recipe {
+    margin-top: 25%;
+    margin-bottom: 200px;
+  }
+
+  #recipe .title h2 {
+    line-height: 45px;
+    margin-bottom: 15%;
+  }
+
+  #recipe .title img {
+    width: 90%;
+  }
+
+  #recipe .comment {
+    margin-top: 25%;
+  }
+
+  #recipe .comment button {
+    margin-bottom: 10%;
+  }
+
+  #recipe .list-comment .description-comment {
+    padding-left: 7%;
+  }
+}
