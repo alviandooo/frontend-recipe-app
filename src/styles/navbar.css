@@ -1,0 +1,23 @@
+.navbar button {
+  background-color: #efc81a;
+  color: white;
+  border: 2px solid black;
+}
+
+/* device phone potrait */
+@media screen and (max-width: 576px), (max-width: 992px) {
+  #navbar button {
+    /* margin-bottom: 20px; */
+    padding-top: 10px;
+    border: 0px;
+    color: black;
+  }
+
+  .navbar {
+    background-color: #efc81a;
+    box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.24);
+    -webkit-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.24);
+    color: #fff5ec !important;
+  }
+}
