@@ -3,14 +3,34 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import logo from "./logo.svg";
 import "./styles/App.css";
-import Home from "./pages/Home";
+import Home from "./pages/recipes/Home";
 import Maintenance from "./pages/Maintenance";
+import Detail from "./pages/recipes/Detail";
+import Login from "./pages/auth/Login";
+import ErrorNotFound from "./pages/ErrorNotFound";
+import AddRecipe from "./pages/recipes/Add";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Home />,
+    },
+    {
+      path: "login",
+      element: <Login />,
+    },
+    {
+      path: "add-recipe",
+      element: <AddRecipe />,
+    },
+    {
+      path: "detail/:id",
+      element: <Detail />,
+    },
+    {
+      path: "*",
+      element: <ErrorNotFound />,
     },
   ]);
 

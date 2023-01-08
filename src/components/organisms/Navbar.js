@@ -1,5 +1,6 @@
 import React from "react";
-import "../styles/navbar.css";
+import "../../styles/navbar.css";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   React.useEffect(() => {
@@ -31,18 +32,14 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto">
               <li className="nav-item me-5">
-                <a
-                  className="nav-link active"
-                  aria-current="page"
-                  href="index.html"
-                >
+                <Link to="/" className="nav-link active" aria-current="page">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item me-5">
-                <a className="nav-link" href="add-recipe.html">
+                <Link to="add-recipe" className="nav-link">
                   Add Recipe
-                </a>
+                </Link>
               </li>
               <li className="nav-item me-5">
                 <a className="nav-link" href="profile.html">
