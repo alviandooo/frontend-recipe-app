@@ -9,6 +9,7 @@ import Detail from "./pages/recipes/Detail";
 import Login from "./pages/auth/Login";
 import ErrorNotFound from "./pages/ErrorNotFound";
 import AddRecipe from "./pages/recipes/Add";
+import Profile from "./pages/profiles/Profile";
 
 function App() {
   const router = createBrowserRouter([
@@ -23,6 +24,10 @@ function App() {
     {
       path: "add-recipe",
       element: <AddRecipe />,
+    },
+    {
+      path: "profile",
+      element: <Profile />,
     },
     {
       path: "detail/:id",

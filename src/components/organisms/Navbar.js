@@ -37,14 +37,14 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item me-5">
-                <Link to="add-recipe" className="nav-link">
+                <Link to="/add-recipe" className="nav-link">
                   Add Recipe
                 </Link>
               </li>
               <li className="nav-item me-5">
-                <a className="nav-link" href="profile.html">
+                <Link to="/profile" className="nav-link">
                   Profile
-                </a>
+                </Link>
               </li>
             </ul>
             <a href="login.html" className="nav-link me-2">
