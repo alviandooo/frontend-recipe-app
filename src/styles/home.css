@@ -27,6 +27,7 @@ body {
 #header .image-2 {
   margin-top: -150px;
   position: absolute;
+  z-index: 3;
 }
 
 #header .image-3 {
@@ -59,7 +60,7 @@ body {
   width: 400px;
   position: absolute;
   right: 0;
-  z-index: 0;
+  z-index: 1;
   background-color: #efc81a;
 }
 /* end style for header */
