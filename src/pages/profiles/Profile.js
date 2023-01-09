@@ -152,7 +152,7 @@ function Profile() {
                     {myRecipes.map((item, key) => (
                       <div
                         key={key}
-                        className="col-lg-3 col-md-4 col-sm-6 col-6 list-recipe"
+                        className="col-lg-3 col-md-4 col-sm-6 col-6 p-0 list-recipe"
                       >
                         <Link
                           to={`/detail/${item.id}`}
@@ -175,7 +175,7 @@ function Profile() {
                     {savedRecipes.map((item, key) => (
                       <div
                         key={key}
-                        className="col-lg-3 col-md-4 col-sm-6 col-6 list-recipe"
+                        className="col-lg-3 col-md-4 col-sm-6 col-6 p-0 list-recipe"
                       >
                         <Link
                           to={`/detail/${item.id}`}
@@ -198,7 +198,7 @@ function Profile() {
                     {likedRecipes.map((item, key) => (
                       <div
                         key={key}
-                        className="col-lg-3 col-md-4 col-sm-6 col-6 list-recipe"
+                        className="col-lg-3 col-md-4 col-sm-6 col-6 p-0 list-recipe"
                       >
                         <Link
                           to={`/detail/${item.id}`}

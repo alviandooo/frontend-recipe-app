@@ -2,7 +2,12 @@ import React from "react";
 import "../../styles/recipes/detail.css";
 import Footer from "../../components/organisms/Footer";
 import Navbar from "../../components/organisms/Navbar";
-import { redirect, redirect as Redirect, useParams } from "react-router-dom";
+import {
+  Link,
+  redirect,
+  redirect as Redirect,
+  useParams,
+} from "react-router-dom";
 
 const recipes = [
   {
@@ -164,7 +169,6 @@ function Detail() {
         <div
           className="modal fade"
           id="video-step-modal"
-          tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
@@ -176,9 +180,9 @@ function Detail() {
                   height="100%"
                   src="https://www.youtube.com/embed/7K4LpJlVj84"
                   title="YouTube video player"
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
+                  allowFullScreen
                 ></iframe>
               </div>
 

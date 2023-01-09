@@ -143,7 +143,7 @@ function Home() {
           {/* <!-- content --> */}
           <div className="row">
             {popularRecipes.map((item, key) => (
-              <div key={key} className="col-lg-4 col-6 mb-md-4">
+              <div key={key} className="col-lg-4 col-6 mb-md-4 p-0">
                 <Link
                   to={`detail/${item.id}`}
                   className="btn btn-lg btn-learn-more"
