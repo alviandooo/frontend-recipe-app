@@ -10,6 +10,7 @@ import Login from "./pages/auth/Login";
 import ErrorNotFound from "./pages/ErrorNotFound";
 import AddRecipe from "./pages/recipes/Add";
 import Profile from "./pages/profiles/Profile";
+import Register from "./pages/auth/Register";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,6 +21,10 @@ function App() {
     {
       path: "login",
       element: <Login />,
+    },
+    {
+      path: "register",
+      element: <Register />,
     },
     {
       path: "add-recipe",
