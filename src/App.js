@@ -11,7 +11,8 @@ import ErrorNotFound from "./pages/ErrorNotFound";
 import AddRecipe from "./pages/recipes/Add";
 import Profile from "./pages/profiles/Profile";
 import Register from "./pages/auth/Register";
-import ResetPassword from "./pages/profiles/ResetPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
+import VerificationResetPassword from "./pages/auth/VerificationResetPassword";
 
 function App() {
   const router = createBrowserRouter([
@@ -30,6 +31,10 @@ function App() {
     {
       path: "reset-password",
       element: <ResetPassword />,
+    },
+    {
+      path: "verify-reset-password",
+      element: <VerificationResetPassword />,
     },
     {
       path: "add-recipe",

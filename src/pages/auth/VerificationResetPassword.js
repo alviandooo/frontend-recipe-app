@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import LeftSideAuth from "../../components/molecules/LeftSideAuth";
-import "../../styles/profiles/resetPassword.css";
+import "../../styles/auth/resetPassword.css";
 
-function ResetPassword() {
+function VerificationResetPassword() {
   return (
     <div>
       <div className="row">
@@ -14,33 +15,31 @@ function ResetPassword() {
         {/* <!-- right side --> */}
         <div className="col-lg-6 col-12 right-side">
           <div className="col-12 section-form-login">
-            <div className="col-lg-6 col-8">
-              <h1>Forgot Password?</h1>
-              <p>
-                We just need your registered e-mail address to send your
-                password
-              </p>
-              <form action="verification-code.html">
+            <div className="col-6">
+              <p>We just need 6 digit code from your e-mail</p>
+              <form>
                 <div className="form-group">
-                  <label className="form-label">E-mail</label>
+                  <label htmlFor="code" className="form-label">
+                    Code 6 digit
+                  </label>
                   <input
                     type="email"
                     className="form-control form-control-lg"
-                    name="email"
-                    id="email"
-                    placeholder="examplexxx@gmail.com"
+                    name="code"
+                    id="code"
+                    placeholder=""
                   />
                 </div>
 
-                <a href="verification-code.html">
+                <Link to="/">
                   <button
                     type="button"
                     id="btn-login"
                     className="btn btn-warning"
                   >
-                    Send E-mail
+                    Reset Password
                   </button>
-                </a>
+                </Link>
               </form>
             </div>
           </div>
@@ -50,4 +49,4 @@ function ResetPassword() {
   );
 }
 
-export default ResetPassword;
+export default VerificationResetPassword;
