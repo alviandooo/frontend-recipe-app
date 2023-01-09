@@ -73,13 +73,13 @@ function Profile() {
                   width="120px"
                   alt=""
                 />
-                <button onClick={changeProfile}>
+                <a href="#/" onClick={changeProfile}>
                   <img
                     src="./images/icon-edit.webp"
                     alt=""
                     className="icon-edit"
                   />
-                </button>
+                </a>
               </div>
               <div className="profile-name mt-2">
                 <p>Garneta Sharina</p>
@@ -97,7 +97,8 @@ function Profile() {
             <div className="tab-profile mb-5">
               <ul className="nav" id="pills-tab" role="tablist">
                 <li className="nav-item" role="presentation">
-                  <button
+                  <a
+                    href="#/"
                     className="nav-link active"
                     id="pills-home-tab"
                     data-bs-toggle="pill"
@@ -108,10 +109,11 @@ function Profile() {
                     aria-selected="true"
                   >
                     My Recipe
-                  </button>
+                  </a>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <button
+                  <a
+                    href="#/"
                     className="nav-link"
                     id="pills-profile-tab"
                     data-bs-toggle="pill"
@@ -122,10 +124,11 @@ function Profile() {
                     aria-selected="false"
                   >
                     Saved Recipe
-                  </button>
+                  </a>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <button
+                  <a
+                    href="#/"
                     className="nav-link"
                     id="pills-contact-tab"
                     data-bs-toggle="pill"
@@ -136,7 +139,7 @@ function Profile() {
                     aria-selected="false"
                   >
                     Liked Recipe
-                  </button>
+                  </a>
                 </li>
               </ul>
               <hr />

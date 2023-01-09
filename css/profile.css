@@ -22,7 +22,6 @@
 }
 
 #content .profile .icon-edit {
-  vertical-align: bottom;
   margin-left: -20px;
   width: 20px;
 }
@@ -59,6 +58,11 @@
 
   color: #ffffff;
   text-shadow: 1px 0px 1px #000;
+}
+
+#content .clickable-div {
+  cursor: pointer;
+  background-color: #000;
 }
 
 #content .profile .change-profile {
