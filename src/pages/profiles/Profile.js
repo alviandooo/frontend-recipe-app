@@ -48,7 +48,7 @@ function Profile() {
   const changeProfile = () => {
     let elementName = document.querySelector(".profile-name");
     let elementChangeProfile = document.querySelector(".change-profile");
-    let checkDisplay = elementChangeProfile.style.display == "block";
+    let checkDisplay = elementChangeProfile.style.display === "block";
     if (checkDisplay) {
       elementChangeProfile.style.display = "none";
       elementName.style.display = "block";
@@ -73,7 +73,7 @@ function Profile() {
                   width="120px"
                   alt=""
                 />
-                <a href="#" onClick={changeProfile}>
+                <a onClick={changeProfile}>
                   <img
                     src="./images/icon-edit.webp"
                     alt=""

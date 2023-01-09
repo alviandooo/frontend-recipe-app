@@ -1,5 +1,4 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
 import ImageSinglePage from "../components/molecules/ImageSinglePage";
 import "../styles/Maintenance.css";
 
