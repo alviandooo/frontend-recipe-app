@@ -1,0 +1,340 @@
+body {
+  background-color: #fff5ec;
+}
+
+/* style for header */
+#header {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+#header #search-recipe {
+  font-size: 15px;
+  height: 55px;
+}
+
+#header .container {
+  position: relative;
+}
+
+#header .image-1 {
+  position: absolute;
+  z-index: 5;
+}
+
+#header .image-2 {
+  margin-top: -150px;
+  position: absolute;
+}
+
+#header .image-3 {
+  margin-left: -130px;
+  margin-top: -40px;
+}
+
+#header .right-side {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#header h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 47px;
+  margin-bottom: 30px;
+
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+
+  color: #2e266f;
+}
+
+#header .overlay-background {
+  height: 100vh;
+  width: 400px;
+  position: absolute;
+  right: 0;
+  z-index: 0;
+  background-color: #efc81a;
+}
+/* end style for header */
+
+/* style for new-recipe */
+#new-recipe {
+  margin-bottom: 110px;
+}
+
+#new-recipe .title {
+  border-left: 10px solid #efc81a;
+  padding-left: 20px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 72px;
+  /* identical to box height, or 129% */
+  margin-bottom: 100px;
+  color: #3f3a3a;
+  position: relative;
+  z-index: 1;
+}
+
+#new-recipe .overlay-background {
+  height: 500px;
+  width: 350px;
+  position: absolute;
+  z-index: 0;
+  background-color: #efc81a;
+  margin-top: 120px;
+}
+
+#new-recipe .image-new-recipe {
+  position: relative;
+  z-index: 5;
+  border-radius: 10px;
+}
+
+#new-recipe .description {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 38px;
+  /* line-height: 5px; */
+  /* border-bottom: 2px solid black; */
+  margin-bottom: 30px;
+  color: #3f3a3a;
+}
+
+#new-recipe .description p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 38px;
+  color: #3f3a3a;
+}
+
+#new-recipe .btn-learn-more {
+  width: 200px;
+  background-color: #efc81a;
+  border-radius: 8px;
+  color: white;
+  font-style: normal;
+  font-size: 12px;
+  /* identical to box height */
+
+  letter-spacing: 0.07em;
+
+  color: #ffffff;
+}
+/* end style for new-recipe */
+
+/* style for popular-recipe */
+#popular-recipe {
+  margin-bottom: 110px;
+}
+
+#popular-recipe .title {
+  border-left: 10px solid #efc81a;
+  padding-left: 20px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 72px;
+  /* identical to box height, or 129% */
+  margin-bottom: 100px;
+  color: #3f3a3a;
+  position: relative;
+  z-index: 1;
+}
+
+#popular-recipe .clickable-image {
+  cursor: pointer;
+  height: 400px;
+  object-fit: cover;
+  position: relative;
+}
+
+#popular-recipe .clickable-image img {
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#popular-recipe .image-title {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  margin: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-shadow: 3px 0px 5px rgba(0, 0, 0, 0.29);
+}
+/* end style for popular-recipe */
+
+/* device phone potrait */
+@media screen and (max-width: 576px) {
+  #header {
+    margin-top: 10vh;
+    padding-top: 20px;
+  }
+
+  #header .right-side {
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
+  }
+
+  #header .container {
+    position: relative;
+  }
+
+  #header .image-1 {
+    position: absolute;
+    width: 350px;
+    z-index: 5;
+  }
+
+  #header .image-2 {
+    width: 260px;
+
+    position: absolute;
+  }
+
+  #header .image-3 {
+    display: none;
+  }
+
+  #header .overlay-background {
+    display: none;
+  }
+
+  #header .right-side {
+    height: 100vh;
+    margin-bottom: -120px;
+  }
+
+  /* style for new-recipe */
+  #new-recipe {
+    margin-top: 170px;
+    margin-bottom: 110px;
+  }
+
+  #new-recipe .title {
+    border-left: 10px solid #efc81a;
+    padding-left: 20px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 72px;
+    /* identical to box height, or 129% */
+    margin-bottom: 100px;
+    color: #3f3a3a;
+    position: relative;
+    z-index: 1;
+  }
+
+  #new-recipe .overlay-background {
+    height: 250px;
+    width: 220px;
+    position: absolute;
+    z-index: 0;
+    background-color: #efc81a;
+    margin-top: 120px;
+  }
+
+  #new-recipe .image-new-recipe {
+    width: 250px;
+    height: 250px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 5;
+    border-radius: 10px;
+  }
+
+  #new-recipe .description-recipe {
+    margin-left: 0px;
+  }
+
+  #new-recipe .description {
+    margin-top: 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 27px;
+    /* line-height: 5px; */
+    /* border-bottom: 2px solid black; */
+    margin-bottom: 10px;
+    color: #3f3a3a;
+  }
+
+  #new-recipe .description p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    color: #3f3a3a;
+  }
+
+  #new-recipe .btn-learn-more {
+    width: 150px;
+    background-color: #efc81a;
+    border-radius: 8px;
+    color: white;
+    font-style: normal;
+    font-size: 12px;
+    /* identical to box height */
+
+    letter-spacing: 0.07em;
+
+    color: #ffffff;
+  }
+  /* end style for new-recipe */
+
+  /* style for popular-recipe */
+  #popular-recipe {
+    margin-bottom: 110px;
+  }
+
+  #popular-recipe .title {
+    border-left: 10px solid #efc81a;
+    padding-left: 20px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 72px;
+    /* identical to box height, or 129% */
+    margin-bottom: 50px;
+    color: #3f3a3a;
+    position: relative;
+    z-index: 1;
+  }
+
+  #popular-recipe .clickable-image {
+    cursor: pointer;
+    height: 200px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  #popular-recipe .clickable-image img {
+    cursor: pointer;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  #popular-recipe .image-title {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    /* margin: 20px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-shadow: 3px 0px 5px rgba(0, 0, 0, 0.29);
+  }
+  /* end style for popular-recipe */
+}
