@@ -73,13 +73,13 @@ function Profile() {
                   width="120px"
                   alt=""
                 />
-                <a onClick={changeProfile}>
+                <button onClick={changeProfile}>
                   <img
                     src="./images/icon-edit.webp"
                     alt=""
                     className="icon-edit"
                   />
-                </a>
+                </button>
               </div>
               <div className="profile-name mt-2">
                 <p>Garneta Sharina</p>
@@ -97,7 +97,7 @@ function Profile() {
             <div className="tab-profile mb-5">
               <ul className="nav" id="pills-tab" role="tablist">
                 <li className="nav-item" role="presentation">
-                  <a
+                  <button
                     className="nav-link active"
                     id="pills-home-tab"
                     data-bs-toggle="pill"
@@ -108,10 +108,10 @@ function Profile() {
                     aria-selected="true"
                   >
                     My Recipe
-                  </a>
+                  </button>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <a
+                  <button
                     className="nav-link"
                     id="pills-profile-tab"
                     data-bs-toggle="pill"
@@ -122,10 +122,10 @@ function Profile() {
                     aria-selected="false"
                   >
                     Saved Recipe
-                  </a>
+                  </button>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <a
+                  <button
                     className="nav-link"
                     id="pills-contact-tab"
                     data-bs-toggle="pill"
@@ -136,7 +136,7 @@ function Profile() {
                     aria-selected="false"
                   >
                     Liked Recipe
-                  </a>
+                  </button>
                 </li>
               </ul>
               <hr />
