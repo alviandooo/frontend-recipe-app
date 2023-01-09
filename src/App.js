@@ -11,6 +11,7 @@ import ErrorNotFound from "./pages/ErrorNotFound";
 import AddRecipe from "./pages/recipes/Add";
 import Profile from "./pages/profiles/Profile";
 import Register from "./pages/auth/Register";
+import ResetPassword from "./pages/profiles/ResetPassword";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,6 +26,10 @@ function App() {
     {
       path: "register",
       element: <Register />,
+    },
+    {
+      path: "reset-password",
+      element: <ResetPassword />,
     },
     {
       path: "add-recipe",

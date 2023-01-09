@@ -19,7 +19,7 @@ function Login() {
               <p>Log in into your existing account</p>
               <form style={{ borderTop: "2px solid #f5f5f5" }}>
                 <div className="form-group">
-                  <label for="email" className="form-label">
+                  <label htmlFor="email" className="form-label">
                     E-mail
                   </label>
                   <input
@@ -31,7 +31,7 @@ function Login() {
                   />
                 </div>
                 <div className="form-group">
-                  <label for="password" className="form-label">
+                  <label htmlFor="password" className="form-label">
                     Password
                   </label>
                   <input
@@ -50,7 +50,7 @@ function Login() {
                     value=""
                     id="agree"
                   />
-                  <label className="form-check-label" for="agree">
+                  <label className="form-check-label" htmlFor="agree">
                     I agree to terms & conditions
                   </label>
                 </div>
@@ -67,7 +67,7 @@ function Login() {
               </form>
 
               <div className="col-12 text-end">
-                <Link to="" className="forgot-password">
+                <Link to="/reset-password" className="forgot-password">
                   Forgot Password ?
                 </Link>
               </div>
