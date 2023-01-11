@@ -1,3 +1,7 @@
+body #page-login {
+  overflow-x: hidden;
+}
+
 .section-form-login h1 {
   /* font-family: "Inter"; */
   font-style: normal;

@@ -2,7 +2,8 @@ import Navbar from "../../components/organisms/Navbar";
 import "../../styles/home.css";
 import Footer from "../../components/organisms/Footer";
 import CardRecipe from "../../components/molecules/CardRecipe";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import React from "react";
 
 const popularRecipes = [
   {
@@ -38,6 +39,18 @@ const popularRecipes = [
 ];
 
 function Home() {
+  const navigate = useNavigate();
+  const isLogin = localStorage.getItem("isLogin");
+  const token = localStorage.getItem("token");
+
+  // check isLogin
+  React.useEffect(() => {
+    if (!isLogin || !token) {
+      console.log("anda belum login");
+      navigate("/login");
+    }
+  }, []);
+
   return (
     <div>
       {/* navbar */}

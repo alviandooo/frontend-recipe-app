@@ -5,7 +5,7 @@ import "../../styles/auth/resetPassword.css";
 
 function VerificationResetPassword() {
   return (
-    <div>
+    <div id="verify-page-reset-password">
       <div className="row">
         {/* <!-- left side --> */}
         <div className="col-lg-6 col-12">

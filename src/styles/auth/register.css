@@ -1,3 +1,7 @@
+body #page-register {
+  overflow-x: hidden;
+}
+
 .section-form-register {
   height: 100%;
   display: flex;

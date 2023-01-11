@@ -5,7 +5,7 @@ import "../../styles/auth/register.css";
 
 function Register() {
   return (
-    <div>
+    <div id="page-register">
       <div className="row">
         <div className="col-lg-6 col-12">
           <LeftSideAuth />
