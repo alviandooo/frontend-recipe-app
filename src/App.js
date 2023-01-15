@@ -14,6 +14,10 @@ import Register from "./pages/auth/Register";
 import ResetPassword from "./pages/auth/ResetPassword";
 import VerificationResetPassword from "./pages/auth/VerificationResetPassword";
 
+// import redux
+import store from "./store";
+import { Provider } from "react-redux";
+
 function App() {
   const isAuth = localStorage.getItem("isAuth") === "true";
   console.log(document.location.pathname);
@@ -62,7 +66,9 @@ function App() {
   if (isMaintenance) {
     return <Maintenance />;
   } else {
-    return <RouterProvider router={router} />;
+    <Provider store={store}>
+      return <RouterProvider router={router} />;
+    </Provider>;
   }
 }
 
