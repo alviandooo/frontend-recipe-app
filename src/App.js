@@ -66,9 +66,9 @@ function App() {
   if (isMaintenance) {
     return <Maintenance />;
   } else {
-    <Provider store={store}>
-      return <RouterProvider router={router} />;
-    </Provider>;
+    // <Provider store={store}>
+    return <RouterProvider router={router} />;
+    // </Provider>;
   }
 }
 

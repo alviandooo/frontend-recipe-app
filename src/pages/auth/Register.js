@@ -13,7 +13,7 @@ function Register() {
     if (isAuth && token) {
       navigate("/");
     }
-  });
+  }, []);
 
   return (
     <div id="page-register">

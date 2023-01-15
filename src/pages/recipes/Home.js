@@ -4,6 +4,7 @@ import Footer from "../../components/organisms/Footer";
 import CardRecipe from "../../components/molecules/CardRecipe";
 import { Link } from "react-router-dom";
 import React from "react";
+import axios from "axios";
 
 const popularRecipes = [
   {
@@ -39,6 +40,21 @@ const popularRecipes = [
 ];
 
 function Home() {
+  const [recipes, setRecipes] = React.useState([]);
+
+  // get recipe data
+  React.useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?sort=id&typeSort=desc`)
+      .then(({ data }) => {
+        setRecipes(data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("gagal mendapatkan data");
+      });
+  }, []);
+
   return (
     <div>
       {/* navbar */}
@@ -106,7 +122,7 @@ function Home() {
             {/* <!-- left side --> */}
             <div className="col-lg-6">
               <img
-                src="/images/new-recipe.webp"
+                src={recipes?.data?.[0].photo ?? "/images/new-recipe.webp"}
                 className="image-new-recipe"
                 width="500px"
                 alt="new-recipe"
@@ -115,12 +131,10 @@ function Home() {
 
             <div className="col-lg-5 offset-1 description-recipe">
               <h2 className="description">
-                Healthy Bone Broth <br />
-                Ramen (Quick & Easy)
+                {recipes?.data?.[0]?.title ?? "Recipe Kosong"}
               </h2>
               <p>
-                Quick + Easy Chicken Bone Broth Ramen- <br />
-                Healthy chicken ramen in a hurry? That’s right!
+                {recipes?.data?.[0]?.description ?? "Description Recipe Kosong"}
               </p>
               <Link to={"detail/1"} className="btn btn-lg btn-learn-more">
                 Learn More

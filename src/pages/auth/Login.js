@@ -43,7 +43,7 @@ function Login() {
     if (isAuth && token) {
       navigate("/");
     }
-  });
+  }, []);
 
   return (
     <div id="page-login">

@@ -13,7 +13,7 @@ function ResetPassword() {
     if (isAuth && token) {
       navigate("/");
     }
-  });
+  }, []);
 
   return (
     <div id="page-reset-password">

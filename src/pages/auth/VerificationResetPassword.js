@@ -13,7 +13,7 @@ function VerificationResetPassword() {
     if (isAuth && token) {
       navigate("/");
     }
-  });
+  }, []);
 
   return (
     <div id="verify-page-reset-password">

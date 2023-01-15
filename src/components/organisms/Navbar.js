@@ -32,7 +32,7 @@ function Navbar() {
         element.style.background = "";
       }
     });
-  });
+  }, []);
   return (
     <div>
       <nav id="navbar" className="navbar navbar-expand-lg fixed-top">
