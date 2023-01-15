@@ -15,6 +15,9 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import VerificationResetPassword from "./pages/auth/VerificationResetPassword";
 
 function App() {
+  const isAuth = localStorage.getItem("isAuth") === "true";
+  console.log(document.location.pathname);
+
   const router = createBrowserRouter([
     {
       path: "/",

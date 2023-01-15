@@ -1,7 +1,25 @@
 .navbar button {
-  background-color: #efc81a;
-  color: white;
+  /* background-color: #efc81a; */
+  color: black;
   border: 2px solid black;
+}
+
+#navbar li .logout {
+  cursor: pointer;
+  padding: 15px;
+}
+
+#navbar .nav-user:hover {
+  background-color: none !important;
+}
+
+#navbar .dropdown .btn {
+  border: 0px !important;
+}
+
+#navbar .dropdown img {
+  border-radius: 50%;
+  border: 1px solid black;
 }
 
 /* device phone potrait */

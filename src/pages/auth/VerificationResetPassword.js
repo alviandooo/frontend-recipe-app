@@ -1,9 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LeftSideAuth from "../../components/molecules/LeftSideAuth";
 import "../../styles/auth/resetPassword.css";
 
 function VerificationResetPassword() {
+  const navigate = useNavigate();
+  const isAuth = localStorage.getItem("isAuth");
+  const token = localStorage.getItem("token");
+
+  // check isAuth
+  React.useEffect(() => {
+    if (isAuth && token) {
+      navigate("/");
+    }
+  });
+
   return (
     <div id="verify-page-reset-password">
       <div className="row">

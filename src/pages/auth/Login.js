@@ -12,7 +12,7 @@ function Login() {
   const [isError, setIsError] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
 
-  const isLogin = localStorage.getItem("isLogin");
+  const isAuth = localStorage.getItem("isAuth");
   const token = localStorage.getItem("token");
 
   const login = () => {
@@ -24,7 +24,7 @@ function Login() {
       })
       .then((response) => {
         localStorage.setItem("token", response.data.jwt_token);
-        localStorage.setItem("isLogin", true);
+        localStorage.setItem("isAuth", true);
         setIsError(false);
         navigate("/");
       })
@@ -38,12 +38,10 @@ function Login() {
       });
   };
 
-  // check isLogin
+  // check isAuth
   React.useEffect(() => {
-    if (isLogin && token) {
-      // console.log("anda sudah login");
+    if (isAuth && token) {
       navigate("/");
-    } else {
     }
   });
 

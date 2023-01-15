@@ -1,11 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/organisms/Footer";
 import Navbar from "../../components/organisms/Navbar";
 import "../../styles/profiles/profile.css";
 import CardRecipe from "../../components/molecules/CardRecipe";
 
 function Profile() {
+  const navigate = useNavigate();
+  const isAuth = localStorage.getItem("isAuth");
+  const token = localStorage.getItem("token");
+
+  React.useEffect(() => {
+    if (!isAuth || !token) {
+      navigate("/login");
+    }
+  }, []);
+
   const myRecipes = [
     {
       id: 2,

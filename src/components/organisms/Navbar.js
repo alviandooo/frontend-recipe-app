@@ -1,11 +1,30 @@
 import React from "react";
 import "../../styles/components/navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 function Navbar() {
-  React.useEffect(() => {
-    let element = document.querySelector("#navbar");
+  const navigate = useNavigate();
+  const [username, setUsername] = React.useState("");
+  const [photoProfile, setPhotoProfile] = React.useState("");
+  const isAuth = localStorage.getItem("isAuth");
 
+  // set username navbar
+  React.useEffect(() => {
+    try {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      setPhotoProfile(decoded.data.photo);
+      setUsername(decoded.data.name);
+    } catch (error) {
+      // alert(error);
+      localStorage.clear();
+      navigate("/");
+    }
+  }, []);
+
+  React.useEffect(() => {
+    // navbar scroll effect
+    let element = document.querySelector("#navbar");
     window.addEventListener("scroll", () => {
       if (window.pageYOffset > 50) {
         element.style.background = "#efc81a";
@@ -47,12 +66,49 @@ function Navbar() {
                 </Link>
               </li>
             </ul>
-            <Link to="/login" className="nav-link me-2">
-              <button className="btn">Login</button>
-            </Link>
-            <Link to="/register" className="nav-link">
-              <button className="btn">Register</button>
-            </Link>
+            {isAuth ? (
+              <div className="nav-link nav-user">
+                <div className="dropdown">
+                  <button
+                    className="btn dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      className="me-2 mx-auto"
+                      src={photoProfile}
+                      width={"40px"}
+                      height={"40px"}
+                      alt="profile"
+                    />
+                    <span>{username}</span>
+                  </button>
+                  <ul className="dropdown-menu">
+                    <li className="">
+                      <span
+                        className="logout"
+                        onClick={() => {
+                          localStorage.clear();
+                          navigate("/");
+                        }}
+                      >
+                        Keluar
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            ) : (
+              <div className="nav-link">
+                <Link to="/login" className="me-2">
+                  <button className="btn">Login</button>
+                </Link>
+                <Link to="/register" className="">
+                  <button className="btn">Register</button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </nav>

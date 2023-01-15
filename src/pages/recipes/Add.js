@@ -1,11 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../../components/organisms/Footer";
 import Navbar from "../../components/organisms/Navbar";
 import "../../styles/recipes/add.css";
 
 function AddRecipe() {
+  const navigate = useNavigate();
+  const isAuth = localStorage.getItem("isAuth");
+  const token = localStorage.getItem("token");
+
+  React.useEffect(() => {
+    if (!isAuth || !token) {
+      navigate("/login");
+    }
+  }, []);
+
   return (
-    <div>
+    <div id="add-recipe">
       <Navbar />
 
       {/* <!-- content --> */}
