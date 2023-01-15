@@ -180,6 +180,10 @@ nav .pagination {
   display: flex;
   justify-content: center;
 }
+
+nav .pagination a {
+  color: #3f3a3a;
+}
 /* end style for popular-recipe */
 
 /* device phone potrait */

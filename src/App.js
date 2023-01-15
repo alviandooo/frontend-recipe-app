@@ -1,7 +1,5 @@
 import React from "react";
-// import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import logo from "./logo.svg";
 import "./styles/App.css";
 import Home from "./pages/recipes/Home";
 import Maintenance from "./pages/Maintenance";
@@ -15,12 +13,14 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import VerificationResetPassword from "./pages/auth/VerificationResetPassword";
 
 // import redux
-import store from "./store";
+import store, { persistor } from "./store/index";
 import { Provider } from "react-redux";
+
+//import redux-persist
+import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
   const isAuth = localStorage.getItem("isAuth") === "true";
-  console.log(document.location.pathname);
 
   const router = createBrowserRouter([
     {
@@ -66,9 +66,13 @@ function App() {
   if (isMaintenance) {
     return <Maintenance />;
   } else {
-    // <Provider store={store}>
-    return <RouterProvider router={router} />;
-    // </Provider>;
+    return (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterProvider router={router} />;
+        </PersistGate>
+      </Provider>
+    );
   }
 }
 

@@ -2,25 +2,17 @@ import React from "react";
 import "../../styles/components/navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import * as authReducer from "../../store/auth/index";
+import { useDispatch, useSelector } from "react-redux";
 
 function Navbar() {
   const navigate = useNavigate();
-  const [username, setUsername] = React.useState("");
-  const [photoProfile, setPhotoProfile] = React.useState("");
+  // const [username, setUsername] = React.useState("");
+  // const [photoProfile, setPhotoProfile] = React.useState("");
   const isAuth = localStorage.getItem("isAuth");
 
-  // set username navbar
-  React.useEffect(() => {
-    try {
-      const decoded = jwt_decode(localStorage.getItem("token"));
-      setPhotoProfile(decoded.data.photo);
-      setUsername(decoded.data.name);
-    } catch (error) {
-      // alert(error);
-      localStorage.clear();
-      navigate("/");
-    }
-  }, []);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth);
 
   React.useEffect(() => {
     // navbar scroll effect
@@ -77,18 +69,24 @@ function Navbar() {
                   >
                     <img
                       className="me-2 mx-auto"
-                      src={photoProfile}
+                      src={user?.data?.photo}
                       width={"40px"}
                       height={"40px"}
                       alt="profile"
                     />
-                    <span>{username}</span>
+                    <span>{user?.data?.name}</span>
                   </button>
                   <ul className="dropdown-menu">
                     <li className="">
                       <span
                         className="logout"
                         onClick={() => {
+                          dispatch(
+                            authReducer.setAuth({
+                              data: null,
+                              id: null,
+                            })
+                          );
                           localStorage.clear();
                           navigate("/");
                         }}

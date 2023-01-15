@@ -179,7 +179,7 @@ function Home() {
               {[...new Array(totalPage)].map((item, key) => {
                 key++;
                 return (
-                  <li className="page-item">
+                  <li key={key} className="page-item">
                     <a
                       className="page-link"
                       onClick={() => fetchPaginationRecipes(key)}
