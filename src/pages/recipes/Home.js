@@ -6,54 +6,44 @@ import { Link } from "react-router-dom";
 import React from "react";
 import axios from "axios";
 
-const popularRecipes = [
-  {
-    id: 2,
-    title: "Chicken Kare",
-    src: "/images/popular-recipe-1.webp",
-  },
-  {
-    id: 3,
-    title: "Bomb Chicken",
-    src: "/images/popular-recipe-2.webp",
-  },
-  {
-    id: 4,
-    title: "Banana Smothie Pop",
-    src: "/images/popular-recipe-3.webp",
-  },
-  {
-    id: 5,
-    title: "Coffe Lava Cake",
-    src: "/images/popular-recipe-4.webp",
-  },
-  {
-    id: 6,
-    title: "Sugar Salmon",
-    src: "/images/popular-recipe-5.webp",
-  },
-  {
-    id: 7,
-    title: "Indian Salad",
-    src: "/images/popular-recipe-6.webp",
-  },
-];
-
 function Home() {
   const [recipes, setRecipes] = React.useState([]);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [totalPage, setTotalPage] = React.useState(1);
 
   // get recipe data
   React.useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?sort=id&typeSort=desc`)
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=id&typeSort=desc&page=${currentPage}&limit=6`
+      )
       .then(({ data }) => {
         setRecipes(data);
+        setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
       })
       .catch((error) => {
         console.log(error);
         alert("gagal mendapatkan data");
       });
   }, []);
+
+  const fetchPaginationRecipes = (positionPage) => {
+    console.log("Position ", positionPage);
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=id&typeSort=desc&page=${positionPage}&limit=6`
+      )
+      .then(({ data }) => {
+        console.log(data);
+        setRecipes(data);
+        setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
+        setCurrentPage(positionPage);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("gagal mendapatkan data");
+      });
+  };
 
   return (
     <div>
@@ -168,6 +158,52 @@ function Home() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* pagination  */}
+        <div className="container">
+          <nav aria-label="Page navigation example" className="mt-4">
+            <ul className="pagination">
+              <li
+                className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
+              >
+                <a
+                  className="page-link"
+                  onClick={() => fetchPaginationRecipes(currentPage - 1)}
+                  aria-label="Previous"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+
+              {[...new Array(totalPage)].map((item, key) => {
+                key++;
+                return (
+                  <li className="page-item">
+                    <a
+                      className="page-link"
+                      onClick={() => fetchPaginationRecipes(key)}
+                    >
+                      {key}
+                    </a>
+                  </li>
+                );
+              })}
+              <li
+                className={`page-item ${
+                  currentPage === totalPage ? "disabled" : ""
+                }`}
+              >
+                <a
+                  className="page-link"
+                  onClick={() => fetchPaginationRecipes(currentPage + 1)}
+                  aria-label="Next"
+                >
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
         {/* <!-- end title --> */}
       </section>
