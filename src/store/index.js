@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./auth";
+import recipeReducer from "./recipe";
 
 // import redux-persist
 import { persistStore, persistReducer } from "redux-persist";
@@ -11,15 +12,16 @@ const customizedMiddleware = getDefaultMiddleware({
   serializableCheck: false,
 });
 
+const rootReducer = combineReducers({
+  auth: authReducer,
+  recipe: recipeReducer,
+});
+
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "recipe"],
 };
-
-const rootReducer = combineReducers({
-  auth: authReducer,
-});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

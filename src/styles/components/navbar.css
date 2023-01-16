@@ -13,6 +13,10 @@
   background-color: none !important;
 }
 
+#navbar .nav-user img {
+  object-fit: cover;
+}
+
 #navbar .dropdown .btn {
   border: 0px !important;
 }

@@ -1,16 +1,20 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LeftSideAuth from "../../components/molecules/LeftSideAuth";
 import "../../styles/auth/resetPassword.css";
 
 function ResetPassword() {
   const navigate = useNavigate();
-  const isAuth = localStorage.getItem("isAuth");
-  const token = localStorage.getItem("token");
+
+  const user = useSelector((state) => state.auth);
+
+  // get local storage
+  const isAuth = user.isLogin;
 
   // check isAuth
   React.useEffect(() => {
-    if (isAuth && token) {
+    if (isAuth) {
       navigate("/");
     }
   }, []);

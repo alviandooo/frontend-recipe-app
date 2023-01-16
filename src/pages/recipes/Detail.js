@@ -3,49 +3,10 @@ import "../../styles/recipes/detail.css";
 import Footer from "../../components/organisms/Footer";
 import Navbar from "../../components/organisms/Navbar";
 import { useParams } from "react-router-dom";
-
-const recipes = [
-  {
-    id: 1,
-    title: "Healthy Bone Broth Ramen (Quick & Easy)",
-    src: "/images/new-recipe.webp",
-  },
-  {
-    id: 2,
-    title: "Chicken Kare",
-    src: "/images/popular-recipe-1.webp",
-  },
-  {
-    id: 3,
-    title: "Bomb Chicken",
-    src: "/images/popular-recipe-2.webp",
-  },
-  {
-    id: 4,
-    title: "Banana Smothie Pop",
-    src: "/images/popular-recipe-3.webp",
-  },
-  {
-    id: 5,
-    title: "Coffe Lava Cake",
-    src: "/images/popular-recipe-4.webp",
-  },
-  {
-    id: 6,
-    title: "Sugar Salmon",
-    src: "/images/popular-recipe-5.webp",
-  },
-  {
-    id: 7,
-    title: "Indian Salad",
-    src: "/images/popular-recipe-6.webp",
-  },
-];
+import { useSelector } from "react-redux";
 
 function Detail() {
-  const { id } = useParams();
-  const index = recipes.findIndex((item) => item?.id === parseInt(id));
-  const data = recipes[index];
+  const { data, id } = useSelector((state) => state.recipe);
 
   return (
     <div>
@@ -56,7 +17,7 @@ function Detail() {
           <div className="row mb-5">
             <div className="title text-center">
               <h2>{data?.title}</h2>
-              <img src={data?.src} width="500px" alt="Loream Sandwich" />
+              <img src={data?.photo} width="500px" alt="Loream Sandwich" />
             </div>
           </div>
 
@@ -64,18 +25,7 @@ function Detail() {
             <div className="col-10">
               <div className="ingredients mb-4">
                 <h3>Ingredients</h3>
-                <ul>
-                  <li>2 Eggs</li>
-                  <li>2 tbsp mayonnaise</li>
-                  <li>3 slices bread</li>
-                  <li>a little butter</li>
-                  <li>⅓ carton of cress</li>
-                  <li>
-                    2-3 slices of tomato or a lettuce leaf and a slice of ham or
-                    cheese
-                  </li>
-                  <li>crisps , to serve</li>
-                </ul>
+                <p>{data?.ingredients}</p>
               </div>
 
               <div className="videos mb-5">
@@ -105,15 +55,6 @@ function Detail() {
                     data-bs-target="#video-step-modal"
                   >
                     Step 3
-                  </button>
-                </div>
-                <div className="mb-3">
-                  <button
-                    className="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#video-step-modal"
-                  >
-                    Step 4
                   </button>
                 </div>
               </div>

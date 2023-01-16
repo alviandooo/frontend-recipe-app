@@ -1,16 +1,11 @@
 import React from "react";
 import "../../styles/components/navbar.css";
 import { Link, useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 import * as authReducer from "../../store/auth/index";
 import { useDispatch, useSelector } from "react-redux";
 
 function Navbar() {
   const navigate = useNavigate();
-  // const [username, setUsername] = React.useState("");
-  // const [photoProfile, setPhotoProfile] = React.useState("");
-  const isAuth = localStorage.getItem("isAuth");
-
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
 
@@ -58,7 +53,7 @@ function Navbar() {
                 </Link>
               </li>
             </ul>
-            {isAuth ? (
+            {user?.isLogin ? (
               <div className="nav-link nav-user">
                 <div className="dropdown">
                   <button
@@ -91,7 +86,7 @@ function Navbar() {
                           navigate("/");
                         }}
                       >
-                        Keluar
+                        Logout
                       </span>
                     </li>
                   </ul>

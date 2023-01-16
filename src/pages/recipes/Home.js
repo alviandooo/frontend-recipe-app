@@ -2,45 +2,59 @@ import Navbar from "../../components/organisms/Navbar";
 import "../../styles/home.css";
 import Footer from "../../components/organisms/Footer";
 import CardRecipe from "../../components/molecules/CardRecipe";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import React from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import * as recipeReducer from "../../store/recipe";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [recipes, setRecipes] = React.useState([]);
+  const [newRecipes, setNewRecipes] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalPage, setTotalPage] = React.useState(1);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // get recipe data
   React.useEffect(() => {
+    // get new recipe
     axios
       .get(
-        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=id&typeSort=desc&page=${currentPage}&limit=6`
+        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc`
+      )
+      .then(({ data }) => {
+        setNewRecipes(data?.data?.[0]);
+      })
+      .catch((error) => {
+        alert("gagal mendapatkan data");
+      });
+
+    // get popular recipe
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc&page=${currentPage}&limit=6`
       )
       .then(({ data }) => {
         setRecipes(data);
         setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
       })
       .catch((error) => {
-        console.log(error);
         alert("gagal mendapatkan data");
       });
   }, []);
 
   const fetchPaginationRecipes = (positionPage) => {
-    console.log("Position ", positionPage);
     axios
       .get(
-        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=id&typeSort=desc&page=${positionPage}&limit=6`
+        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc&page=${positionPage}&limit=6`
       )
       .then(({ data }) => {
-        console.log(data);
         setRecipes(data);
         setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
         setCurrentPage(positionPage);
       })
       .catch((error) => {
-        console.log(error);
         alert("gagal mendapatkan data");
       });
   };
@@ -112,23 +126,42 @@ function Home() {
             {/* <!-- left side --> */}
             <div className="col-lg-6">
               <img
-                src={recipes?.data?.[0].photo ?? "/images/new-recipe.webp"}
+                src={newRecipes?.photo ?? "/images/new-recipe.webp"}
                 className="image-new-recipe"
                 width="500px"
+                height="500px"
                 alt="new-recipe"
               />
             </div>
 
             <div className="col-lg-5 offset-1 description-recipe">
               <h2 className="description">
-                {recipes?.data?.[0]?.title ?? "Recipe Kosong"}
+                {newRecipes?.title ?? "Recipe Kosong"}
               </h2>
-              <p>
-                {recipes?.data?.[0]?.description ?? "Description Recipe Kosong"}
-              </p>
-              <Link to={"detail/1"} className="btn btn-lg btn-learn-more">
+              <p>{newRecipes?.description ?? "Description Recipe Kosong"}</p>
+              <div
+                className="btn btn-lg btn-learn-more"
+                onClick={() => {
+                  axios
+                    .get(
+                      `${process.env.REACT_APP_URL_BACKEND}/recipes/${newRecipes?.id}`
+                    )
+                    .then((response) => {
+                      dispatch(
+                        recipeReducer.setRecipe({
+                          data: recipes?.data?.[0],
+                          id: newRecipes?.id,
+                        })
+                      );
+                      navigate(`/detail/${newRecipes?.id}`);
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                }}
+              >
                 Learn More
-              </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -148,13 +181,12 @@ function Home() {
           {/* <!-- content --> */}
           <div className="row">
             {recipes?.data?.map((item, key) => (
-              <div key={key} className="col-lg-4 col-6 mb-md-4 p-0">
-                <Link
-                  to={`detail/${item.id}`}
-                  className="btn btn-lg btn-learn-more"
-                >
-                  <CardRecipe title={item.title} imageSrc={item.photo} />
-                </Link>
+              <div key={key} className="col-lg-4 col-6 mb-md-4">
+                <CardRecipe
+                  title={item.title}
+                  imageSrc={item.photo}
+                  recipeId={item.id}
+                />
               </div>
             ))}
           </div>
@@ -180,12 +212,12 @@ function Home() {
                 key++;
                 return (
                   <li key={key} className="page-item">
-                    <a
+                    <div
                       className="page-link"
                       onClick={() => fetchPaginationRecipes(key)}
                     >
                       {key}
-                    </a>
+                    </div>
                   </li>
                 );
               })}
@@ -194,13 +226,13 @@ function Home() {
                   currentPage === totalPage ? "disabled" : ""
                 }`}
               >
-                <a
+                <div
                   className="page-link"
                   onClick={() => fetchPaginationRecipes(currentPage + 1)}
                   aria-label="Next"
                 >
                   <span aria-hidden="true">&raquo;</span>
-                </a>
+                </div>
               </li>
             </ul>
           </nav>

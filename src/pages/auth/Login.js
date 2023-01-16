@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LeftSideAuth from "../../components/molecules/LeftSideAuth";
 import "../../styles/auth/login.css";
@@ -15,15 +15,16 @@ function Login() {
   const [errorMsg, setErrorMsg] = React.useState("");
   const [isAgree, setIsAgree] = React.useState(false);
 
+  const user = useSelector((state) => state.auth);
+
   // get local storage
-  const isAuth = localStorage.getItem("isAuth");
-  const token = localStorage.getItem("token");
+  const isAuth = user.isLogin;
 
   const dispatch = useDispatch();
 
   const login = () => {
     if (!isAgree) {
-      alert("You have agree with terms & condition!");
+      alert("You must be agree with terms & condition!");
     } else {
       setIsLoading(true);
       axios
@@ -32,20 +33,20 @@ function Login() {
           password,
         })
         .then((response) => {
-          localStorage.setItem("token", response.data.jwt_token);
-          localStorage.setItem("isAuth", true);
           // save to redux
           dispatch(
             authReducer.setAuth({
               data: response?.data?.data,
               id: response?.data?.data?.id,
+              token: response?.data?.jwt_token,
+              isLogin: true,
             })
           );
           setIsError(false);
           navigate("/");
         })
         .catch((error) => {
-          console.log(error.response.data.message);
+          // console.log(error.response.data.message);
           setIsError(true);
           setErrorMsg(error.response.data.message);
         })
@@ -57,7 +58,7 @@ function Login() {
 
   // check isAuth
   React.useEffect(() => {
-    if (isAuth && token) {
+    if (isAuth) {
       navigate("/");
     }
   }, []);
@@ -130,7 +131,6 @@ function Login() {
                   </label>
                 </div>
 
-                {/* <Link to="/"> */}
                 <button
                   type="button"
                   id="btn-login"
@@ -143,7 +143,6 @@ function Login() {
                     <div class="spinner-border text-light" role="status"></div>
                   )}
                 </button>
-                {/* </Link> */}
               </form>
 
               <div className="col-12 text-end">
