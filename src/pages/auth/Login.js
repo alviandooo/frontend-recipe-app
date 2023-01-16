@@ -1,8 +1,10 @@
 import axios from "axios";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LeftSideAuth from "../../components/molecules/LeftSideAuth";
 import "../../styles/auth/login.css";
+import * as authReducer from "../../store/auth/index";
 
 function Login() {
   const navigate = useNavigate();
@@ -11,36 +13,52 @@ function Login() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
+  const [isAgree, setIsAgree] = React.useState(false);
 
-  const isAuth = localStorage.getItem("isAuth");
-  const token = localStorage.getItem("token");
+  const user = useSelector((state) => state.auth);
+
+  // get local storage
+  const isAuth = user.isLogin;
+
+  const dispatch = useDispatch();
 
   const login = () => {
-    setIsLoading(true);
-    axios
-      .post(`${process.env.REACT_APP_URL_BACKEND}/auth/login`, {
-        email,
-        password,
-      })
-      .then((response) => {
-        localStorage.setItem("token", response.data.jwt_token);
-        localStorage.setItem("isAuth", true);
-        setIsError(false);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-        setIsError(true);
-        setErrorMsg(error.response.data.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    if (!isAgree) {
+      alert("You must be agree with terms & condition!");
+    } else {
+      setIsLoading(true);
+      axios
+        .post(`${process.env.REACT_APP_URL_BACKEND}/auth/login`, {
+          email,
+          password,
+        })
+        .then((response) => {
+          // save to redux
+          dispatch(
+            authReducer.setAuth({
+              data: response?.data?.data,
+              id: response?.data?.data?.id,
+              token: response?.data?.jwt_token,
+              isLogin: true,
+            })
+          );
+          setIsError(false);
+          navigate("/");
+        })
+        .catch((error) => {
+          // console.log(error.response.data.message);
+          setIsError(true);
+          setErrorMsg(error.response.data.message);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   };
 
   // check isAuth
   React.useEffect(() => {
-    if (isAuth && token) {
+    if (isAuth) {
       navigate("/");
     }
   }, []);
@@ -104,13 +122,15 @@ function Login() {
                     type="checkbox"
                     value=""
                     id="agree"
+                    onChange={(event) => {
+                      setIsAgree(event.target.checked);
+                    }}
                   />
                   <label className="form-check-label" htmlFor="agree">
                     I agree to terms & conditions
                   </label>
                 </div>
 
-                {/* <Link to="/"> */}
                 <button
                   type="button"
                   id="btn-login"
@@ -123,7 +143,6 @@ function Login() {
                     <div class="spinner-border text-light" role="status"></div>
                   )}
                 </button>
-                {/* </Link> */}
               </form>
 
               <div className="col-12 text-end">

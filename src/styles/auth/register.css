@@ -1,5 +1,6 @@
 body #page-register {
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .section-form-register {

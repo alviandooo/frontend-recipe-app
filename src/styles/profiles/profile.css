@@ -2,6 +2,13 @@
   margin-top: 50px;
 }
 
+#content .rounded-circle {
+  object-fit: cover;
+  height: 110px;
+  border: 1px solid black;
+  width: 120px;
+}
+
 /* style-for-profile */
 #content .profile {
   /* display: flex;
@@ -43,6 +50,7 @@
 
 #content .list-recipe img {
   height: 250px;
+  object-fit: cover;
 }
 
 #content .list-recipe h2 {
