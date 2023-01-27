@@ -178,6 +178,16 @@ body {
   text-shadow: 3px 0px 5px rgba(0, 0, 0, 0.29);
 }
 
+#popular-recipe .image-title:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #efc81a;
+}
+
 #popular-recipe .page-link {
   cursor: pointer;
 }
@@ -190,6 +200,26 @@ nav .pagination {
 nav .pagination a {
   color: #3f3a3a;
 }
+
+#new-recipe .clickable-image img {
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.mb-min-250 {
+  margin-bottom: -200px !important;
+}
+
+#new-recipe .clickable-image .image-title {
+  font-size: 14pt;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-shadow: 3px 0px 5px rgba(0, 0, 0, 0.29);
+}
+
 /* end style for popular-recipe */
 
 /* device phone potrait */

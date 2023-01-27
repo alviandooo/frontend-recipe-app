@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Detail() {
+  // mengambil redux data recipe
   const { data, id } = useSelector((state) => state.recipe);
 
   return (

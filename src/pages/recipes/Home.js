@@ -3,7 +3,7 @@ import "../../styles/home.css";
 import Footer from "../../components/organisms/Footer";
 import CardRecipe from "../../components/molecules/CardRecipe";
 // import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import * as recipeReducer from "../../store/recipe";
@@ -14,10 +14,38 @@ function Home() {
   const [newRecipes, setNewRecipes] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalPage, setTotalPage] = React.useState(1);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [dataSearch, setDataSearch] = React.useState([]);
+  const [search, setSearch] = React.useState("");
+  const [errorSearch, setErrorSearch] = useState(false);
+  const [errorSearchMsg, setErrorSearchMsg] = useState(
+    "There is no result! please try again with another keyword"
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // get search recipe
+  const getSearchRecipe = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}/recipes/data/search?keyword=${search}&searchBy=title`
+      )
+      .then((res) => {
+        setErrorSearch(false);
+        setDataSearch(res?.data?.data);
+      })
+      .catch((err) => {
+        // console.log(err);
+        setErrorSearch(true);
+      })
+      .finally(() => {
+        // setErrorSearch(false);
+        // setDataSearch([]);
+      });
+  };
+
   React.useEffect(() => {
+    setIsLoading(true);
     // get new recipe
     axios
       .get(
@@ -28,6 +56,9 @@ function Home() {
       })
       .catch((error) => {
         alert("gagal mendapatkan data");
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
 
     // get popular recipe
@@ -41,6 +72,9 @@ function Home() {
       })
       .catch((error) => {
         alert("gagal mendapatkan data");
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -81,6 +115,10 @@ function Home() {
                 className="form-control form-control-lg"
                 placeholder="Search Recipe..."
                 id="search-recipe"
+                onChange={(event) => {
+                  setSearch(event.target.value);
+                  getSearchRecipe(event.target.value);
+                }}
               />
             </div>
 
@@ -111,59 +149,97 @@ function Home() {
       {/* <!-- end header --> */}
 
       {/* <!-- new recipe --> */}
-      <section id="new-recipe">
-        {/* <!-- overlay background --> */}
-        <div className="overlay-background"></div>
+      <section
+        id="new-recipe"
+        className={errorSearch || search ? "mb-min-200" : ""}
+      >
+        <div
+          className={
+            !search ? "overlay-background" : "overlay-background d-none"
+          }
+        ></div>
 
-        {/* <!-- title --> */}
         <div className="container">
-          <h2 className="title">New Recipe</h2>
+          <h2 className="title">
+            {!search ? "New Recipe" : `Search result for ${search}`}
+          </h2>
         </div>
 
-        {/* <!-- content --> */}
         <div className="container">
-          <div className="row align-items-center">
-            {/* <!-- left side --> */}
-            <div className="col-lg-6">
-              <img
-                src={newRecipes?.photo ?? "/images/new-recipe.webp"}
-                className="image-new-recipe"
-                width="500px"
-                height="500px"
-                alt="new-recipe"
-              />
-            </div>
+          {!search ? (
+            <div className="row align-items-center">
+              <div className="col-lg-6">
+                <img
+                  src={
+                    newRecipes?.photo ??
+                    "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
+                  }
+                  className="image-new-recipe"
+                  width="500px"
+                  height="500px"
+                  alt="new-recipe"
+                />
+              </div>
 
-            <div className="col-lg-5 offset-1 description-recipe">
-              <h2 className="description">
-                {newRecipes?.title ?? "Recipe Kosong"}
-              </h2>
-              <p>{newRecipes?.description ?? "Description Recipe Kosong"}</p>
-              <div
-                className="btn btn-lg btn-learn-more"
-                onClick={() => {
-                  axios
-                    .get(
-                      `${process.env.REACT_APP_URL_BACKEND}/recipes/${newRecipes?.id}`
-                    )
-                    .then((response) => {
-                      dispatch(
-                        recipeReducer.setRecipe({
-                          data: recipes?.data?.[0],
-                          id: newRecipes?.id,
-                        })
-                      );
-                      navigate(`/detail/${newRecipes?.id}`);
-                    })
-                    .catch((error) => {
-                      console.log(error);
-                    });
-                }}
-              >
-                Learn More
+              <div className="col-lg-5 offset-1 description-recipe">
+                {isLoading ? (
+                  <p className="placeholder-glow">
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                  </p>
+                ) : (
+                  <div>
+                    <h2 className="description">
+                      {newRecipes?.title ?? "Recipe Kosong"}
+                    </h2>
+                    <p>
+                      {newRecipes?.description ?? "Description Recipe Kosong"}
+                    </p>
+                    <div
+                      className="btn btn-lg btn-learn-more"
+                      onClick={() => {
+                        axios
+                          .get(
+                            `${process.env.REACT_APP_URL_BACKEND}/recipes/${newRecipes?.id}`
+                          )
+                          .then((response) => {
+                            dispatch(
+                              recipeReducer.setRecipe({
+                                data: recipes?.data?.[0],
+                                id: newRecipes?.id,
+                              })
+                            );
+                            navigate(`/detail/${newRecipes?.id}`);
+                          })
+                          .catch((error) => {
+                            console.log(error);
+                          });
+                      }}
+                    >
+                      Learn More
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
+          ) : errorSearch ? (
+            <div className="row text-center">
+              <p>There is no recipe, please try again!</p>
+            </div>
+          ) : (
+            <div className="row align-items-center">
+              {dataSearch.map((item, key) => (
+                <div key={key} className="col-lg-6 col-6 mb-md-4">
+                  <CardRecipe
+                    title={item.title}
+                    imageSrc={item.photo}
+                    recipeId={item.id}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         {/* <!-- end title --> */}
       </section>
@@ -180,15 +256,32 @@ function Home() {
 
           {/* <!-- content --> */}
           <div className="row">
-            {recipes?.data?.map((item, key) => (
-              <div key={key} className="col-lg-4 col-6 mb-md-4">
-                <CardRecipe
-                  title={item.title}
-                  imageSrc={item.photo}
-                  recipeId={item.id}
-                />
+            {isLoading ? (
+              <div className="text-center">
+                <div className="spinner-grow text-warning" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+                <div className="spinner-grow text-warning" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+                <div className="spinner-grow text-warning" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+                <div className="spinner-grow text-warning" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
               </div>
-            ))}
+            ) : (
+              recipes?.data?.map((item, key) => (
+                <div key={key} className="col-lg-4 col-6 mb-md-4">
+                  <CardRecipe
+                    title={item.title}
+                    imageSrc={item.photo}
+                    recipeId={item.id}
+                  />
+                </div>
+              ))
+            )}
           </div>
         </div>
 
@@ -208,15 +301,20 @@ function Home() {
                 </a>
               </li>
 
-              {[...new Array(totalPage)].map((item, key) => {
-                key++;
+              {[...new Array(totalPage)].map((item, page) => {
+                page++;
                 return (
-                  <li key={key} className="page-item">
+                  <li
+                    key={page}
+                    className={`page-item ${
+                      currentPage === page ? "active" : null
+                    }`}
+                  >
                     <div
                       className="page-link"
-                      onClick={() => fetchPaginationRecipes(key)}
+                      onClick={() => fetchPaginationRecipes(page)}
                     >
-                      {key}
+                      {page}
                     </div>
                   </li>
                 );
