@@ -201,6 +201,12 @@ nav .pagination a {
   color: #3f3a3a;
 }
 
+#new-recipe .clickable-image {
+  border-radius: 10px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
 #new-recipe .clickable-image img {
   border-radius: 10px;
   object-fit: cover;
