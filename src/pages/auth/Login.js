@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LeftSideAuth from "../../components/molecules/LeftSideAuth";
 import "../../styles/auth/login.css";
 import * as authReducer from "../../store/auth/index";
+import Swal from "sweetalert2";
 
 function Login() {
   const navigate = useNavigate();
@@ -24,7 +25,11 @@ function Login() {
 
   const login = () => {
     if (!isAgree) {
-      alert("You must be agree with terms & condition!");
+      Swal.fire({
+        icon: "error",
+        title: "Error!",
+        text: "You must be agree with terms & condition!",
+      });
     } else {
       setIsLoading(true);
       axios
@@ -43,6 +48,10 @@ function Login() {
             })
           );
           setIsError(false);
+          Swal.fire({
+            icon: "success",
+            title: "Login is successfully!",
+          });
           navigate("/");
         })
         .catch((error) => {

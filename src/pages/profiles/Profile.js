@@ -9,6 +9,7 @@ import axios from "axios";
 import * as authReducer from "../../store/auth";
 import ProfileHeader from "../../components/molecules/ProfileHeader";
 import ProfileRecipeTab from "../../components/molecules/ProfileRecipeTab";
+import Swal from "sweetalert2";
 
 function Profile() {
   const navigate = useNavigate();
@@ -39,7 +40,11 @@ function Profile() {
         config
       )
       .then((response) => {
-        alert(response.data.message);
+        // alert(response.data.message);
+        Swal.fire({
+          icon: "success",
+          title: `${response.data.message}`,
+        });
         dispatch(
           authReducer.setAuth({
             data: response?.data?.data?.[0],
@@ -51,12 +56,15 @@ function Profile() {
         resetInput();
       })
       .catch((error) => {
-        console.log(error.response.data);
         if (error.response.status === 401) {
           localStorage.removeItem("persist:root");
           navigate("/login");
         } else {
-          alert(`ERROR : ${error.response.data.message}`);
+          // alert(`ERROR : ${error.response.data.message}`);
+          Swal.fire({
+            icon: "error",
+            title: `${error.response.data.message}`,
+          });
         }
       })
       .finally(() => {

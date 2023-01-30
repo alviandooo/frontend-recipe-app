@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LeftSideAuth from "../../components/molecules/LeftSideAuth";
 import "../../styles/auth/register.css";
+import Swal from "sweetalert2";
 
 function Register() {
   const navigate = useNavigate();
@@ -25,7 +26,11 @@ function Register() {
 
   const register = () => {
     if (!isAgree) {
-      alert("You must be agree with terms & condition!");
+      Swal.fire({
+        icon: "error",
+        title: "Error!",
+        text: "You must be agree with terms & condition!",
+      });
     } else {
       axios
         .post(`${process.env.REACT_APP_URL_BACKEND}/auth/register`, {
@@ -39,7 +44,10 @@ function Register() {
           setIsError(false);
           setIsSuccess(true);
           setSuccessMsg("You have successfully register!");
-          alert("You have successfully register!!");
+          Swal.fire({
+            icon: "success",
+            title: "You have successfully register!",
+          });
           navigate("/login");
         })
         .catch((error) => {

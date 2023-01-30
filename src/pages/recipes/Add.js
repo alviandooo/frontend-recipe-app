@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../components/organisms/Footer";
 import Navbar from "../../components/organisms/Navbar";
 import "../../styles/recipes/add.css";
+import Swal from "sweetalert2";
 
 function AddRecipe() {
   const navigate = useNavigate();
@@ -35,7 +36,10 @@ function AddRecipe() {
     axios
       .post(`${process.env.REACT_APP_URL_BACKEND}/recipes`, data, config)
       .then((response) => {
-        alert(`Success : ${response.data.message}`);
+        Swal.fire({
+          icon: "success",
+          title: `${response.data.message}`,
+        });
         navigate("/");
       })
       .catch((error) => {
@@ -43,7 +47,10 @@ function AddRecipe() {
           localStorage.removeItem("persist:root");
           navigate("/login");
         } else {
-          alert(`ERROR : ${error.response.data.message}`);
+          Swal.fire({
+            icon: "error",
+            title: `${error.response.data.message}`,
+          });
         }
       })
       .finally(() => {

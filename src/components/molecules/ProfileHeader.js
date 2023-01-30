@@ -42,7 +42,7 @@ function ProfileHeader() {
           >
             Change Profile
           </button>
-          <button className="btn btn-secondary">Change Password</button>
+          {/* <button className="btn btn-secondary">Change Password</button> */}
         </div>
       </div>
     </div>

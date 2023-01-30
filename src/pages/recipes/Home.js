@@ -8,6 +8,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import * as recipeReducer from "../../store/recipe";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Home() {
   const [recipes, setRecipes] = React.useState([]);
@@ -18,9 +19,6 @@ function Home() {
   const [dataSearch, setDataSearch] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [errorSearch, setErrorSearch] = useState(false);
-  const [errorSearchMsg, setErrorSearchMsg] = useState(
-    "There is no result! please try again with another keyword"
-  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -46,32 +44,39 @@ function Home() {
 
   React.useEffect(() => {
     setIsLoading(true);
-    // get new recipe
-    axios
-      .get(
-        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc`
-      )
-      .then(({ data }) => {
-        setNewRecipes(data?.data?.[0]);
-      })
-      .catch((error) => {
-        alert("gagal mendapatkan data");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
 
-    // get popular recipe
-    axios
-      .get(
-        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc&page=${currentPage}&limit=6`
-      )
-      .then(({ data }) => {
-        setRecipes(data);
-        setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
+    const fetchNewRecipe = axios.get(
+      `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc`
+    );
+
+    const fetchPopularRecipe = axios.get(
+      `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc&page=${currentPage}&limit=6`
+    );
+
+    Promise.all([fetchNewRecipe, fetchPopularRecipe])
+      .then((res) => {
+        // console.log(res[1].data.data);
+
+        // set new recipe
+        setNewRecipes(res?.[0]?.data?.data?.[0]);
+
+        // set popular recipes
+        setRecipes(res?.[1]?.data?.data);
+
+        // set total pagination popular recipes
+        setTotalPage(
+          Math.ceil(res?.[1]?.data?.total_all_data / res?.[1]?.data?.limit)
+        );
       })
-      .catch((error) => {
-        alert("gagal mendapatkan data");
+      .catch((err) => {
+        console.log(`error : ${err}`);
+        setIsLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Cannot get data from server!",
+          showCancelButton: false,
+          showCloseButton: false,
+        });
       })
       .finally(() => {
         setIsLoading(false);
@@ -79,17 +84,26 @@ function Home() {
   }, []);
 
   const fetchPaginationRecipes = (positionPage) => {
+    setIsLoading(true);
+
     axios
       .get(
         `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc&page=${positionPage}&limit=6`
       )
       .then(({ data }) => {
-        setRecipes(data);
+        setIsLoading(false);
+        setRecipes(data?.data);
         setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
         setCurrentPage(positionPage);
       })
       .catch((error) => {
-        alert("gagal mendapatkan data");
+        setIsLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Cannot get data from server!",
+          showCancelButton: false,
+          showCloseButton: false,
+        });
       });
   };
 
@@ -272,7 +286,7 @@ function Home() {
                 </div>
               </div>
             ) : (
-              recipes?.data?.map((item, key) => (
+              recipes?.map((item, key) => (
                 <div key={key} className="col-lg-4 col-6 mb-md-4">
                   <CardRecipe
                     title={item.title}
