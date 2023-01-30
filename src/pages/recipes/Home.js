@@ -18,9 +18,10 @@ function Home() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [dataSearch, setDataSearch] = React.useState([]);
   const [search, setSearch] = React.useState("");
-  const [errorSearch, setErrorSearch] = useState(false);
+  const [errorSearch, setErrorSearch] = React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [sortBy, setSortBy] = React.useState(["created_at", "desc"]);
 
   // get search recipe
   const getSearchRecipe = () => {
@@ -88,7 +89,7 @@ function Home() {
 
     axios
       .get(
-        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc&page=${positionPage}&limit=6`
+        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=${sortBy[0]}&typeSort=${sortBy[1]}&page=${currentPage}&limit=6`
       )
       .then(({ data }) => {
         setIsLoading(false);
@@ -106,6 +107,33 @@ function Home() {
         });
       });
   };
+
+  React.useEffect(() => {
+    setIsLoading(true);
+    // get popular recipe
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=${sortBy[0]}&typeSort=${sortBy[1]}&page=${currentPage}&limit=6`
+      )
+      .then(({ data }) => {
+        console.log(data?.data);
+        setRecipes(data?.data);
+        setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Cannot get data from server!",
+          showCancelButton: false,
+          showCloseButton: false,
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [sortBy, currentPage]);
 
   return (
     <div>
@@ -266,7 +294,40 @@ function Home() {
 
         <div className="container">
           {/* <!-- title --> */}
-          <h2 className="title">Popular Recipe</h2>
+          <div className="row d-flex justify-content-center align-items-center mb-5 mt-5">
+            <div className="col-lg-10 ">
+              <h2 className="title float-start">Popular Recipe</h2>
+            </div>
+            <div className="col-lg-2">
+              <select
+                className="form-control float-end"
+                onChange={(event) => {
+                  const value = event.target.value;
+                  if (value === "1" || value === "0") {
+                    // Newest
+                    setSortBy(["created_at", "desc"]);
+                  } else if (value === "2") {
+                    // A-Z
+                    setSortBy(["title", "-"]);
+                  } else if (value === "3") {
+                    // Z-A
+                    setSortBy(["title", "desc"]);
+                  } else {
+                    // Oldest
+                    setSortBy(["created_at", "asc"]);
+                  }
+                }}
+              >
+                <option value="0" selected>
+                  Sort by (Default)
+                </option>
+                <option value="1">Newest</option>
+                <option value="2">A-Z</option>
+                <option value="3">Z-A</option>
+                <option value="4">Oldest</option>
+              </select>
+            </div>
+          </div>
 
           {/* <!-- content --> */}
           <div className="row">
@@ -308,7 +369,10 @@ function Home() {
               >
                 <a
                   className="page-link"
-                  onClick={() => fetchPaginationRecipes(currentPage - 1)}
+                  onClick={() => {
+                    setCurrentPage(currentPage - 1);
+                    fetchPaginationRecipes(currentPage - 1);
+                  }}
                   aria-label="Previous"
                 >
                   <span aria-hidden="true">&laquo;</span>
@@ -326,7 +390,10 @@ function Home() {
                   >
                     <div
                       className="page-link"
-                      onClick={() => fetchPaginationRecipes(page)}
+                      onClick={() => {
+                        setCurrentPage(page);
+                        fetchPaginationRecipes(page);
+                      }}
                     >
                       {page}
                     </div>
@@ -340,7 +407,10 @@ function Home() {
               >
                 <div
                   className="page-link"
-                  onClick={() => fetchPaginationRecipes(currentPage + 1)}
+                  onClick={() => {
+                    setCurrentPage(currentPage + 1);
+                    fetchPaginationRecipes(currentPage + 1);
+                  }}
                   aria-label="Next"
                 >
                   <span aria-hidden="true">&raquo;</span>

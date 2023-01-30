@@ -67,7 +67,7 @@ body {
 
 /* style for new-recipe */
 #new-recipe {
-  margin-bottom: 110px;
+  margin-bottom: 150px;
   height: 85vh;
 }
 
@@ -146,7 +146,7 @@ body {
   font-size: 30px;
   line-height: 72px;
   /* identical to box height, or 129% */
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
   color: #3f3a3a;
   position: relative;
   z-index: 1;
