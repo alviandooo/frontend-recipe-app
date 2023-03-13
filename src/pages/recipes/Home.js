@@ -24,12 +24,14 @@ function Home() {
   const [sortBy, setSortBy] = React.useState(["created_at", "desc"]);
 
   // get search recipe
-  const getSearchRecipe = () => {
+  const getSearchRecipe = (keyword) => {
+    console.log("keyword", keyword);
     axios
       .get(
-        `${process.env.REACT_APP_URL_BACKEND}/recipes/data/search?keyword=${search}&searchBy=title`
+        `${process.env.REACT_APP_URL_BACKEND}/recipes/data/search?keyword=${keyword}&searchBy=title`
       )
       .then((res) => {
+        console.log("cari", res);
         setErrorSearch(false);
         setDataSearch(res?.data?.data);
       })
@@ -116,7 +118,6 @@ function Home() {
         `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=${sortBy[0]}&typeSort=${sortBy[1]}&page=${currentPage}&limit=6`
       )
       .then(({ data }) => {
-        console.log(data?.data);
         setRecipes(data?.data);
         setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
         setIsLoading(false);
@@ -154,7 +155,7 @@ function Home() {
               </h1>
               <input
                 type="text"
-                className="form-control form-control-lg"
+                className="form-control form-control-lg mb-2"
                 placeholder="Search Recipe..."
                 id="search-recipe"
                 onChange={(event) => {
@@ -162,6 +163,11 @@ function Home() {
                   getSearchRecipe(event.target.value);
                 }}
               />
+              {search && (
+                <a href="#search" className="text-dark">
+                  Lihat hasil pencarian
+                </a>
+              )}
             </div>
 
             {/* <!-- right side --> */}
@@ -200,13 +206,11 @@ function Home() {
             !search ? "overlay-background" : "overlay-background d-none"
           }
         ></div>
-
-        <div className="container">
+        <div className="container" id="search">
           <h2 className="title">
             {!search ? "New Recipe" : `Search result for ${search}`}
           </h2>
         </div>
-
         <div className="container">
           {!search ? (
             <div className="row align-items-center">
