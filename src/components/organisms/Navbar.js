@@ -8,6 +8,7 @@ function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
+  const pathname = window.location.pathname;
 
   React.useEffect(() => {
     // navbar scroll effect
@@ -38,17 +39,29 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto">
               <li className="nav-item me-5">
-                <Link to="/" className="nav-link active" aria-current="page">
+                <Link
+                  to="/"
+                  className={`nav-link ${pathname === "/" && "active"}`}
+                  aria-current="page"
+                >
                   Home
                 </Link>
               </li>
               <li className="nav-item me-5">
-                <Link to="/add-recipe" className="nav-link">
+                <Link
+                  to="/add-recipe"
+                  className={`nav-link ${
+                    pathname === "/add-recipe" && "active"
+                  }`}
+                >
                   Add Recipe
                 </Link>
               </li>
               <li className="nav-item me-5">
-                <Link to="/profile" className="nav-link">
+                <Link
+                  to="/profile"
+                  className={`nav-link ${pathname === "/profile" && "active"}`}
+                >
                   Profile
                 </Link>
               </li>

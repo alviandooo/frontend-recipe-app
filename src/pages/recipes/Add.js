@@ -72,7 +72,7 @@ function AddRecipe() {
         <div className="row content-item align-items-center">
           <div className="form-add-recipe col-lg-8 text-center">
             <div style={{ textAlign: "left" }}>
-              <div clas="form-group">
+              <div className="form-group">
                 <label className="label mb-1">Foto :</label>
                 <input
                   type="file"
@@ -82,7 +82,7 @@ function AddRecipe() {
                   }}
                 />
               </div>
-              <div clas="form-group">
+              <div className="form-group">
                 <label className="label mb-1">Title :</label>
                 <input
                   type="text"
@@ -93,7 +93,7 @@ function AddRecipe() {
                   }}
                 />
               </div>
-              <div clas="form-group">
+              <div className="form-group">
                 <label className="label mb-1">Decription / Slogan :</label>
                 <input
                   type="text"
@@ -104,7 +104,7 @@ function AddRecipe() {
                   }}
                 />
               </div>
-              <div clas="form-group">
+              <div className="form-group">
                 <label className="label mb-1">Ingredients :</label>
                 <textarea
                   className="form-control"
@@ -117,8 +117,11 @@ function AddRecipe() {
                     setIngredients(event.target.value);
                   }}
                 ></textarea>
+                <small style={{ marginTop: "-20px" }}>
+                  *gunakan tanda koma ( , ) sebagai pemisah antar bahan
+                </small>
               </div>
-              <div clas="form-group">
+              <div className="form-group">
                 <label className="label mb-1">Video :</label>
                 <input
                   type="text"

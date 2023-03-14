@@ -17,6 +17,10 @@
 }
 
 #content .form-control {
+  /* margin-bottom: 15px; */
+}
+
+#content .form-group {
   margin-bottom: 15px;
 }
 
