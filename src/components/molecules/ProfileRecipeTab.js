@@ -4,19 +4,6 @@ import CardRecipe from "./CardRecipe";
 import MyRecipeTab from "./profiles/MyRecipeTab";
 
 function ProfileRecipeTab() {
-  const myRecipes = [
-    {
-      id: 2,
-      title: "Chicken Kare",
-      src: "/images/popular-recipe-1.webp",
-    },
-    {
-      id: 3,
-      title: "Bomb Chicken",
-      src: "/images/popular-recipe-2.webp",
-    },
-  ];
-
   const savedRecipes = [
     {
       id: 4,
@@ -49,7 +36,7 @@ function ProfileRecipeTab() {
         <li className="nav-item" role="presentation">
           <a
             href="#/"
-            className="nav-link active"
+            className="nav-link"
             id="pills-home-tab"
             data-bs-toggle="pill"
             data-bs-target="#pills-my-recipe"

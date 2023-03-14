@@ -25,13 +25,11 @@ function Home() {
 
   // get search recipe
   const getSearchRecipe = (keyword) => {
-    console.log("keyword", keyword);
     axios
       .get(
         `${process.env.REACT_APP_URL_BACKEND}/recipes/data/search?keyword=${keyword}&searchBy=title`
       )
       .then((res) => {
-        console.log("cari", res);
         setErrorSearch(false);
         setDataSearch(res?.data?.data);
       })
