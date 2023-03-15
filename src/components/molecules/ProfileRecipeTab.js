@@ -66,7 +66,7 @@ function ProfileRecipeTab() {
         <li className="nav-item" role="presentation">
           <a
             href="#/"
-            className="nav-link"
+            className="nav-link active"
             id="pills-contact-tab"
             data-bs-toggle="pill"
             data-bs-target="#pills-liked-recipe"

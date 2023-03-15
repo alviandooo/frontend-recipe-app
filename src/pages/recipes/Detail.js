@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 function Detail() {
   // mengambil redux data recipe
   const { data, id } = useSelector((state) => state.recipe);
-
+  console.log("data", data);
   return (
     <div>
       <Navbar />
@@ -17,8 +17,12 @@ function Detail() {
         <div className="container">
           <div className="row mb-5">
             <div className="title text-center">
-              <h2>{data?.title}</h2>
-              <img src={data?.photo} width="500px" alt="Loream Sandwich" />
+              <h2>{data?.recipe?.[0]?.title}</h2>
+              <img
+                src={data?.recipe?.[0]?.photo}
+                width="500px"
+                alt="Loream Sandwich"
+              />
             </div>
           </div>
 
@@ -26,38 +30,26 @@ function Detail() {
             <div className="col-10">
               <div className="ingredients mb-4">
                 <h3>Ingredients</h3>
-                <p>{data?.ingredients}</p>
+                <p>{data?.recipe?.[0]?.ingredients}</p>
               </div>
 
               <div className="videos mb-5">
                 <h3>Video Step</h3>
-                <div className="mb-3">
-                  <button
-                    className="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#video-step-modal"
-                  >
-                    Step 1
-                  </button>
-                </div>
-                <div className="mb-3">
-                  <button
-                    className="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#video-step-modal"
-                  >
-                    Step 2
-                  </button>
-                </div>
-                <div className="mb-3">
-                  <button
-                    className="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#video-step-modal"
-                  >
-                    Step 3
-                  </button>
-                </div>
+                {data?.videos?.map((item, key) => {
+                  return (
+                    <>
+                      <div key={key} className="mb-3">
+                        <a
+                          href={item?.video}
+                          target="_blank"
+                          className="btn btn-warning"
+                        >
+                          Step {key + 1}
+                        </a>
+                      </div>
+                    </>
+                  );
+                })}
               </div>
 
               <div className="comment">
@@ -101,40 +93,6 @@ function Detail() {
       </section>
       {/* <!-- end-section-recipe --> */}
 
-      {/* <!-- modal-video-step --> */}
-      <div
-        className="modal fade"
-        id="video-step-modal"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-xl">
-          <div className="modal-content" style={{ height: "90vh" }}>
-            <div className="modal-body">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/watch?v=np8q838Quaw"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Tutup
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* <!-- end-modal-video-step --> */}
       <Footer />
     </div>
   );

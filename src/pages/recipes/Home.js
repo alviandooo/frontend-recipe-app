@@ -59,7 +59,7 @@ function Home() {
         // console.log(res[1].data.data);
 
         // set new recipe
-        setNewRecipes(res?.[0]?.data?.data?.[0]);
+        setNewRecipes(res?.[0]?.data?.data?.recipe?.[0]);
 
         // set popular recipes
         setRecipes(res?.[1]?.data?.data);
@@ -250,8 +250,8 @@ function Home() {
                           .then((response) => {
                             dispatch(
                               recipeReducer.setRecipe({
-                                data: recipes?.data?.[0],
-                                id: newRecipes?.id,
+                                data: response?.data?.data,
+                                id: response?.data?.data?.recipes?.[0]?.id,
                               })
                             );
                             navigate(`/detail/${newRecipes?.id}`);
@@ -273,7 +273,7 @@ function Home() {
             </div>
           ) : (
             <div className="row align-items-center">
-              {dataSearch.map((item, key) => (
+              {dataSearch?.map((item, key) => (
                 <div key={key} className="col-lg-4 col-6 mb-md-4">
                   <CardRecipe
                     title={item.title}
@@ -349,15 +349,19 @@ function Home() {
                 </div>
               </div>
             ) : (
-              recipes?.map((item, key) => (
-                <div key={key} className="col-lg-4 col-6 mb-md-4">
-                  <CardRecipe
-                    title={item.title}
-                    imageSrc={item.photo}
-                    recipeId={item.id}
-                  />
-                </div>
-              ))
+              recipes?.recipe?.map((item, key) => {
+                return (
+                  <>
+                    <div key={key} className="col-lg-4 col-6 mb-md-4">
+                      <CardRecipe
+                        title={item.title}
+                        imageSrc={item.photo}
+                        recipeId={item.id}
+                      />
+                    </div>
+                  </>
+                );
+              })
             )}
           </div>
         </div>

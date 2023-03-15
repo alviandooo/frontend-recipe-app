@@ -9,26 +9,29 @@ function CardRecipe(props) {
   const { title, imageSrc, recipeId } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const getDetailRecipe = (recipeId) => {
+    axios
+      .get(`${process.env.REACT_APP_URL_BACKEND}/recipes/${recipeId}`)
+      .then((response) => {
+        dispatch(
+          recipeReducer.setRecipe({
+            data: response?.data?.data,
+            id: response?.data?.data?.recipes?.[0]?.id,
+          })
+        );
+        navigate(`/detail/${response?.data?.data?.recipes?.[0]?.id}`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <div
         className="clickable-image"
-        onClick={() => {
-          axios
-            .get(`${process.env.REACT_APP_URL_BACKEND}/recipes/${recipeId}`)
-            .then((response) => {
-              dispatch(
-                recipeReducer.setRecipe({
-                  data: response?.data?.data?.[0],
-                  id: response?.data?.data?.[0]?.id,
-                })
-              );
-              navigate(`/detail/${response?.data?.data?.[0]?.id}`);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }}
+        onClick={() => getDetailRecipe(recipeId)}
       >
         <img src={imageSrc} width="100%" height="100%" alt={title} />
         <h2 className="image-title">{title}</h2>
