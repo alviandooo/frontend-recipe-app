@@ -17,7 +17,7 @@ function CardRecipe(props) {
         dispatch(
           recipeReducer.setRecipe({
             data: response?.data?.data,
-            id: response?.data?.data?.recipes?.[0]?.id,
+            id: response?.data?.data?.recipe?.[0]?.id,
           })
         );
         navigate(`/detail/${response?.data?.data?.recipes?.[0]?.id}`);
