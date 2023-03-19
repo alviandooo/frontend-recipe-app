@@ -385,7 +385,7 @@ function Home() {
                 </a>
               </li>
 
-              {[...new Array(totalPage)]?.map((item, page) => {
+              {/* {[...new Array(totalPage)]?.map((item, page) => {
                 page++;
                 return (
                   <li
@@ -405,7 +405,7 @@ function Home() {
                     </div>
                   </li>
                 );
-              })}
+              })} */}
               <li
                 className={`page-item ${
                   currentPage === totalPage ? "disabled" : ""
