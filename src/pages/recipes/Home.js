@@ -385,7 +385,7 @@ function Home() {
                 </a>
               </li>
 
-              {[...new Array(totalPage)].map((item, page) => {
+              {[...new Array(totalPage)]?.map((item, page) => {
                 page++;
                 return (
                   <li
