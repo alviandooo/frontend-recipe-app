@@ -349,6 +349,7 @@ function Home() {
                 </div>
               </div>
             ) : (
+              recipes?.recipe &&
               recipes?.recipe?.map((item, key) => {
                 return (
                   <>
