@@ -276,9 +276,9 @@ function Home() {
               {dataSearch?.map((item, key) => (
                 <div key={key} className="col-lg-4 col-6 mb-md-4">
                   <CardRecipe
-                    title={item.title}
-                    imageSrc={item.photo}
-                    recipeId={item.id}
+                    title={item?.title}
+                    imageSrc={item?.photo}
+                    recipeId={item?.id}
                   />
                 </div>
               ))}
@@ -332,7 +332,7 @@ function Home() {
           </div>
 
           {/* <!-- content --> */}
-          {/* <div className="row">
+          <div className="row">
             {isLoading ? (
               <div className="text-center">
                 <div className="spinner-grow text-warning" role="status">
@@ -354,20 +354,22 @@ function Home() {
                   <>
                     <div key={key} className="col-lg-4 col-6 mb-md-4">
                       <CardRecipe
-                        title={item.title}
-                        imageSrc={item.photo}
-                        recipeId={item.id}
+                        title={item?.title}
+                        imageSrc={item?.photo}
+                        recipeId={item?.id}
                       />
                     </div>
                   </>
                 );
               })
             )}
-          </div> */}
+          </div>
         </div>
 
         {/* pagination  */}
-        <div className="container">
+        <div
+          className={`container ${totalPage !== 0 ? `visible` : `invisible`}`}
+        >
           <nav aria-label="Page navigation example" className="mt-4">
             <ul className="pagination">
               <li
@@ -385,7 +387,7 @@ function Home() {
                 </a>
               </li>
 
-              {/* {[...new Array(totalPage)]?.map((item, page) => {
+              {[...new Array(totalPage)].map((item, page) => {
                 page++;
                 return (
                   <li
@@ -405,7 +407,7 @@ function Home() {
                     </div>
                   </li>
                 );
-              })} */}
+              })}
               <li
                 className={`page-item ${
                   currentPage === totalPage ? "disabled" : ""
