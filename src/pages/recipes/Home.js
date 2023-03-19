@@ -332,7 +332,7 @@ function Home() {
           </div>
 
           {/* <!-- content --> */}
-          <div className="row">
+          {/* <div className="row">
             {isLoading ? (
               <div className="text-center">
                 <div className="spinner-grow text-warning" role="status">
@@ -363,7 +363,7 @@ function Home() {
                 );
               })
             )}
-          </div>
+          </div> */}
         </div>
 
         {/* pagination  */}
