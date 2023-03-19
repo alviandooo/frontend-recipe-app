@@ -20,7 +20,7 @@ function CardRecipe(props) {
             id: response?.data?.data?.recipe?.[0]?.id,
           })
         );
-        navigate(`/detail/${response?.data?.data?.recipes?.[0]?.id}`);
+        navigate(`/detail/${response?.data?.data?.recipe?.[0]?.id}`);
       })
       .catch((error) => {
         console.log(error);

@@ -1,14 +1,43 @@
 import React from "react";
+import Swal from "sweetalert2";
 import "../../styles/recipes/detail.css";
 import Footer from "../../components/organisms/Footer";
 import Navbar from "../../components/organisms/Navbar";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 function Detail() {
   // mengambil redux data recipe
   const { data, id } = useSelector((state) => state.recipe);
-  console.log("data", data);
+  const auth = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  const isOwnUser = auth?.id === data?.recipe?.[0]?.user_id;
+
+  const deleteRecipe = () => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${auth?.token}`,
+      },
+    };
+
+    axios
+      .delete(
+        `${process.env.REACT_APP_URL_BACKEND}/recipes/delete/${id}`,
+        config
+      )
+      .then((res) => {
+        Swal.fire("Deleted!", "Your recipe has been deleted.", "success");
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire("Deleted!", "Your recipe can't deleted.", "error");
+      });
+  };
+
   return (
     <div>
       <Navbar />
@@ -25,6 +54,41 @@ function Detail() {
               />
             </div>
           </div>
+
+          {isOwnUser && (
+            <div className="row justify-content-center gap-3 mb-5">
+              <button
+                className="btn btn-warning"
+                style={{ width: "150px" }}
+                onClick={() => {
+                  navigate(`/edit/${id}`);
+                }}
+              >
+                Edit
+              </button>
+              <button
+                className="btn btn-danger"
+                style={{ width: "150px" }}
+                onClick={() => {
+                  Swal.fire({
+                    title: "Anda yakin?",
+                    text: "Anda ingin menghapus Recipe ini?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      deleteRecipe();
+                    }
+                  });
+                }}
+              >
+                Hapus
+              </button>
+            </div>
+          )}
 
           <div className="row content">
             <div className="col-10">

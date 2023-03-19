@@ -12,7 +12,7 @@ function MyRecipeTab() {
     axios
       .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?userId=${user.id}`)
       .then((response) => {
-        setMyRecipes(response?.data?.data);
+        setMyRecipes(response?.data?.data?.recipe);
       })
       .catch((error) => {
         console.log(error);

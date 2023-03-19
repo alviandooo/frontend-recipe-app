@@ -4,6 +4,7 @@ import "./styles/App.css";
 import Home from "./pages/recipes/Home";
 import Maintenance from "./pages/Maintenance";
 import Detail from "./pages/recipes/Detail";
+import Edit from "./pages/recipes/Edit";
 import Login from "./pages/auth/Login";
 import ErrorNotFound from "./pages/ErrorNotFound";
 import AddRecipe from "./pages/recipes/Add";
@@ -52,6 +53,10 @@ function App() {
     {
       path: "detail/:id",
       element: <Detail />,
+    },
+    {
+      path: "edit/:id",
+      element: <Edit />,
     },
     {
       path: "*",
