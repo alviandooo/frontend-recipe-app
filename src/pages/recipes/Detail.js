@@ -10,6 +10,7 @@ import axios from "axios";
 function Detail() {
   // mengambil redux data recipe
   const { data, id } = useSelector((state) => state.recipe);
+
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
@@ -25,7 +26,9 @@ function Detail() {
 
     axios
       .delete(
-        `${process.env.REACT_APP_URL_BACKEND}/recipes/delete/${id}`,
+        `${process.env.REACT_APP_URL_BACKEND}/recipes/delete/${
+          id || data?.recipe?.[0]?.id
+        }`,
         config
       )
       .then((res) => {
@@ -61,7 +64,7 @@ function Detail() {
                 className="btn btn-warning"
                 style={{ width: "150px" }}
                 onClick={() => {
-                  navigate(`/edit/${id}`);
+                  navigate(`/edit/${id || data?.recipe?.[0]?.id}`);
                 }}
               >
                 Edit

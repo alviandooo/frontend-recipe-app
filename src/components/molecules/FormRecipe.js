@@ -18,6 +18,47 @@ function FormRecipe() {
   const user = useSelector((state) => state.auth);
   const data = useSelector((state) => state.recipe);
 
+  const addRecipe = () => {
+    setIsLoading(true);
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    let data = new FormData();
+    data.append("photo", photo);
+    data.append("title", title);
+    data.append("description", description);
+    data.append("ingredients", ingredients);
+    data.append("video", video);
+
+    axios
+      .post(`${process.env.REACT_APP_URL_BACKEND}/recipes`, data, config)
+      .then((response) => {
+        Swal.fire({
+          icon: "success",
+          title: `${response.data.message}`,
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          localStorage.removeItem("persist:root");
+          navigate("/login");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: `${error.response.data.message}`,
+          });
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   const updateRecipe = () => {
     setIsLoading(true);
     const config = {
@@ -36,7 +77,7 @@ function FormRecipe() {
 
     axios
       .patch(
-        `${process.env.REACT_APP_URL_BACKEND}/recipes/update/${data?.id}`,
+        `${process.env.REACT_APP_URL_BACKEND}/recipes/update/${data?.data?.recipe?.[0]?.id}`,
         dataPost,
         config
       )
@@ -153,7 +194,18 @@ function FormRecipe() {
           />
         </div>
         {!isLoading ? (
-          <button className="btn btn-warning" onClick={updateRecipe}>
+          <button
+            className="btn btn-warning"
+            onClick={() => {
+              switch (editPage) {
+                case true:
+                  updateRecipe();
+                  break;
+                case false:
+                  addRecipe();
+              }
+            }}
+          >
             {editPage === true ? "Update" : "Tambah"}
           </button>
         ) : (
